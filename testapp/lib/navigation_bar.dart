@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './home.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,10 +18,7 @@ class _HomeState extends State<Home> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
 
   static const List<Widget> _pages = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    MyHomePage(title: 'Home Page'),
     Text(
       'Index 1: Games',
       style: optionStyle,
