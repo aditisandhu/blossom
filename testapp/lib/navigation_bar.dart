@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './home.dart';
+import 'home_page.dart';
+import 'maps_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,15 +21,16 @@ class _HomeState extends State<Home> {
   static const List<Widget> _pages = <Widget>[
     MyHomePage(title: 'Home Page'),
     Text(
-      'Index 1: Games',
+      'Page 2: Track',
       style: optionStyle,
     ),
     Text(
-      'Index 2: Map',
+      'Page 3: Learning',
       style: optionStyle,
     ),
+    MapSample(),
     Text(
-      'Index 3: Profile',
+      'Page 5: Profile',
       style: optionStyle,
     ),
   ];
@@ -56,8 +58,12 @@ class _HomeState extends State<Home> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.games, color: Colors.black,),
-            label: 'Games',
+            icon: Icon(Icons.track_changes, color: Colors.black,),
+            label: 'Track',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_library, color: Colors.black,),
+            label: 'Learn',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on, color: Colors.black,),
