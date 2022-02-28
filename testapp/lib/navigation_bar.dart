@@ -44,9 +44,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Blossom'),
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
