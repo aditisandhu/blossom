@@ -22,7 +22,7 @@ class LocationService {
 
   Future<LatLng> getPlace(String input, lat, lng) async {
     final String baseUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$key';
-    final String location = '&location=$lat,$lng&radius=1000';
+    final String location = '&location=$lat,$lng&radius=5000';
     final String keyword = '&keyword=$input';
     final String finalUrl = baseUrl + location + keyword;
 
@@ -30,15 +30,20 @@ class LocationService {
     var json = convert.jsonDecode(response.body);
     var results = json['results'];
 
+    print(results[0]);
+
     var placeId = results[0]['place_id'];
     
-    final String placeUrl = 'https://maps.googleapis.com/maps/api/place/json?key=$key&place_id=$placeId&fields=name,rating,reviews,formatted_address,formatted_phone_number,user_ratings_total,geometry,website';
+    final String placeUrl = 'https://maps.googleapis.com/maps/api/place/details/json?key=$key&placeid=$placeId&fields=name,rating,reviews,formatted_address,formatted_phone_number,user_ratings_total,geometry,website';
 
-    var place_response = await http.get(Uri.parse(finalUrl));
-    var place_json = convert.jsonDecode(response.body);
-    var place_results = json['result'];
+    var placeResponse = await http.get(Uri.parse(placeUrl));
+    var placeJson = convert.jsonDecode(placeResponse.body);
+    var placeResults = placeJson['result'];
 
-    var latLangPosition = place_results['geometry']['location'] as LatLng;
+    print(placeResults);
+
+    LatLng latLangPosition = LatLng(placeResults['geometry']['location']['lat'], placeResults['geometry']['location']['lng']);
+
     return latLangPosition;
   }
 
