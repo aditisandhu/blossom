@@ -20,7 +20,7 @@ class LocationService {
     return placeId;
   }
 
-  Future<LatLng> getPlace(String input, lat, lng) async {
+  Future<List<dynamic>> getPlace(String input, lat, lng) async {
     final String baseUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$key';
     final String location = '&location=$lat,$lng&radius=5000';
     final String keyword = '&keyword=$input';
@@ -29,22 +29,25 @@ class LocationService {
     var response = await http.get(Uri.parse(finalUrl));
     var json = convert.jsonDecode(response.body);
     var results = json['results'];
+    var places = [];
 
-    print(results[0]);
+    for (var i = 0; i < results.length; i++) {
+      print(results[i]);
 
-    var placeId = results[0]['place_id'];
+      var placeId = results[i]['place_id'];
     
-    final String placeUrl = 'https://maps.googleapis.com/maps/api/place/details/json?key=$key&placeid=$placeId&fields=name,rating,reviews,formatted_address,formatted_phone_number,user_ratings_total,geometry,website';
+      final String placeUrl = 'https://maps.googleapis.com/maps/api/place/details/json?key=$key&placeid=$placeId&fields=name,rating,reviews,formatted_address,formatted_phone_number,user_ratings_total,geometry,website';
 
-    var placeResponse = await http.get(Uri.parse(placeUrl));
-    var placeJson = convert.jsonDecode(placeResponse.body);
-    var placeResults = placeJson['result'];
+      var placeResponse = await http.get(Uri.parse(placeUrl));
+      var placeJson = convert.jsonDecode(placeResponse.body);
+      var placeResults = placeJson['result'];
 
-    print(placeResults);
+      print(placeResults);
 
-    LatLng latLangPosition = LatLng(placeResults['geometry']['location']['lat'], placeResults['geometry']['location']['lng']);
-
-    return latLangPosition;
+      places.add(placeResults);
+    }
+    print(places);
+    return places;
   }
 
 }
