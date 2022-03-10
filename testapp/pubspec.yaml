@@ -41,6 +41,7 @@ dependencies:
   http: ^0.13.4
   sliding_up_panel: ^2.0.0+1
   url_launcher: ^6.0.20
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'learning_page.dart';
 import 'home_page.dart';
 import 'maps_page.dart';
+import 'option.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,16 +20,13 @@ class _HomeState extends State<Home> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
 
-  static const List<Widget> _pages = <Widget>[
+  static List<Widget> _pages = <Widget>[
     MyHomePage(title: 'Home Page'),
     Text(
       'Page 2: Track',
       style: optionStyle,
     ),
-    Text(
-      'Page 3: Learning',
-      style: optionStyle,
-    ),
+    LearningPage(category: null, controller: null, onChangedPage: (int value) {  },onClickedOption: (Option value) {  },),
     MapSample(),
     Text(
       'Page 5: Profile',
