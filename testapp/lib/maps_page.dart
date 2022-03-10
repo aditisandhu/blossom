@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import './location_service.dart';
 import './menstrual_icons_icons.dart';
@@ -88,6 +89,9 @@ class MapSampleState extends State<MapSample> {
 
   TextEditingController _searchController = TextEditingController();
   bool flag = false;
+  bool pageRequestedFlag = false;
+  dynamic pageRequestedResults;
+  dynamic pageRequestedAllResults;
 
   @override
   Widget build(BuildContext context) {
@@ -138,122 +142,14 @@ class MapSampleState extends State<MapSample> {
 
         buildDragHandle(),
 
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-                Row(children: [
-                  IconButton(
-                    onPressed: () => search(_searchController.text), 
-                    icon: Icon(Icons.search),),
-                  Expanded(child: TextFormField(
-                    controller: _searchController,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(hintText: 'Search Maps'),
-                    onChanged: (value) {
-                      print(value);
-                    },
-                  )),
-                ],),
-                
-                SizedBox(height: 20,),
-
-                Row(children: [
-                  IconButton(onPressed: () => search("sanitary pads"), icon: Icon(MenstrualIcons.pad),          iconSize: 40,),
-                  IconButton(onPressed: () => search("tampons"), icon: Icon(MenstrualIcons.tampon),       iconSize: 40,),
-                  IconButton(onPressed: () => search("contraception"), icon: Icon(MenstrualIcons.pills),        iconSize: 40,),
-                  IconButton(onPressed: () => search("condoms"), icon: Icon(MenstrualIcons.condom),       iconSize: 40,),
-                  IconButton(onPressed: () => search("pharmacy"), icon: Icon(MenstrualIcons.pharmacy),     iconSize: 40,),
-                  IconButton(onPressed: () => search("doctor"), icon: Icon(MenstrualIcons.sthethoscope), iconSize: 40,),
-                ],),
-
-                SizedBox(height: 20,),
-
-                Text('  Near Me', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
-
-                SizedBox(height: 10,),
-
-                if (flag) ...[
-                  Container(
-                    width: double.infinity, 
-                    margin: const EdgeInsets.all(10),
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Text(pharmacies[0]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-                        SizedBox(height: 15,),
-                        Text(pharmacies[0]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text('Distance: ' + getDistance(pharmacies[0]['geometry']['location']['lat'], pharmacies[0]['geometry']['location']['lng']) + '  |  Rating: ' + pharmacies[0]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward, size: 25,))
-                        ],)
-                    ]),),
-
-                    Container(
-                    width: double.infinity, 
-                    margin: const EdgeInsets.all(10),
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Text(pharmacies[1]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-                        SizedBox(height: 15,),
-                        Text(pharmacies[1]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text('Distance: ' + getDistance(pharmacies[1]['geometry']['location']['lat'], pharmacies[1]['geometry']['location']['lng']) + '  |  Rating: ' + pharmacies[1]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward, size: 25,))
-                        ],)
-                    ]),),
-
-                    Container(
-                    width: double.infinity, 
-                    margin: const EdgeInsets.all(10),
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Text(pharmacies[2]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-                        SizedBox(height: 15,),
-                        Text(pharmacies[2]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text('Distance: ' + getDistance(pharmacies[2]['geometry']['location']['lat'], pharmacies[2]['geometry']['location']['lng']) + '  |  Rating: ' + pharmacies[2]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward, size: 25,))
-                        ],)
-                    ]),),
-
-                    Container(
-                    width: double.infinity, 
-                    margin: const EdgeInsets.all(10),
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Text(pharmacies[3]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-                        SizedBox(height: 15,),
-                        Text(pharmacies[3]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text('Distance: ' + getDistance(pharmacies[3]['geometry']['location']['lat'], pharmacies[3]['geometry']['location']['lng']) + '  |  Rating: ' + pharmacies[3]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward, size: 25,))
-                        ],)
-                    ]),),
-
-                    Container(
-                    width: double.infinity, 
-                    margin: const EdgeInsets.all(10),
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Text(pharmacies[4]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-                        SizedBox(height: 15,),
-                        Text(pharmacies[4]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text('Distance: ' + getDistance(pharmacies[4]['geometry']['location']['lat'], pharmacies[4]['geometry']['location']['lng']) + '  |  Rating: ' + pharmacies[4]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward, size: 25,))
-                        ],)
-                    ]),),
-                ],
-                
-            ],
-          ),
-        ),
+        if (pageRequestedFlag) ...[
+          SizedBox(height: 5,),
+          pageWidget(pageRequestedResults, pageRequestedAllResults)
+        ] 
+        
+        else ...[
+          slidingPanelHome(),
+        ],
 
         SizedBox(height: 24,),
       ],
@@ -270,4 +166,299 @@ class MapSampleState extends State<MapSample> {
       ),
     )
   );
+
+  Widget slidingPanelHome() => Container(
+    padding: EdgeInsets.symmetric(horizontal: 10),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+          Row(children: [
+            IconButton(
+              onPressed: () => search(_searchController.text), 
+              icon: Icon(Icons.search),),
+            Expanded(child: TextFormField(
+              controller: _searchController,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(hintText: 'Search Maps'),
+              onChanged: (value) {
+                print(value);
+              },
+            )),
+          ],),
+          
+          SizedBox(height: 20,),
+
+          Row(children: [
+            IconButton(onPressed: () => search("sanitary pads"), icon: Icon(MenstrualIcons.pad),          iconSize: 40,),
+            IconButton(onPressed: () => search("tampons"), icon: Icon(MenstrualIcons.tampon),       iconSize: 40,),
+            IconButton(onPressed: () => search("contraception"), icon: Icon(MenstrualIcons.pills),        iconSize: 40,),
+            IconButton(onPressed: () => search("condoms"), icon: Icon(MenstrualIcons.condom),       iconSize: 40,),
+            IconButton(onPressed: () => search("pharmacy"), icon: Icon(MenstrualIcons.pharmacy),     iconSize: 40,),
+            IconButton(onPressed: () => search("doctor"), icon: Icon(MenstrualIcons.sthethoscope), iconSize: 40,),
+          ],),
+
+          SizedBox(height: 20,),
+
+          Text('  Near Me', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
+
+          SizedBox(height: 10,),
+
+          if (flag) ...[
+
+            Column(
+              children: [
+                for (var i = 0; i < 5; i++) nearBy(i), 
+              ],
+            ),
+          ],
+          
+      ],
+    ),
+  );
+
+  Widget nearBy(i) => Container(
+    width: double.infinity, 
+    margin: const EdgeInsets.all(10),
+    color: Color.fromARGB(255, 237, 211, 210),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
+      children: [
+        Text(pharmacies[i]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
+        SizedBox(height: 15,),
+        Text(pharmacies[i]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text('Distance: ' + getDistance(pharmacies[i]['geometry']['location']['lat'], pharmacies[i]['geometry']['location']['lng']) + ' • Rating: ' + pharmacies[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+          IconButton(onPressed: () => pageRequested(pharmacies[i], pharmacies), icon: Icon(Icons.arrow_forward, size: 25,))
+        ],)
+    ]),
+  );
+
+  pageRequested(results, allResults) {
+    print(results);
+    print(results.keys.toList()..sort());
+    setState(() {
+      pageRequestedFlag = true;
+      pageRequestedResults = results;
+      pageRequestedAllResults = allResults;
+    });
+  }
+  
+  homeRequested() {
+    setState(() {
+      pageRequestedFlag = false;
+    });
+  }
+
+  var defaultHours = [
+    "Monday: 9:00 AM - 10:00 PM",
+    "Tuesday: 9:00 AM - 10:00 PM",
+    "Wednesday: 9:00 AM - 10:00 PM",
+    "Thursday: 9:00 AM - 10:00 PM",
+    "Friday: 9:00 AM - 10:00 PM",
+    "Saturday: 9:00 AM - 10:00 PM",
+    "Sunday: 9:00 AM - 10:00 PM",
+  ];
+
+  Widget pageWidget(results, allResults) => Container(
+    padding: EdgeInsets.symmetric(horizontal: 10),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(children: [
+          IconButton(onPressed: () => homeRequested(), icon: Icon(Icons.arrow_back, size: 25,)),
+          
+          Flexible(
+            child: Text(results['name'], maxLines: 2, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
+          )
+        ],),
+
+        SizedBox(height: 10,),
+
+        Text('     Sanitary Products   •   ' + getDistance(results['geometry']['location']['lat'], results['geometry']['location']['lng']) + '   •   ' + results['rating'].toString() + ' ☆   •   ' + getStars(results), 
+          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+
+        Container(
+          width: double.infinity, 
+          margin: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 2, 42, 59),
+            borderRadius: BorderRadius.circular(12)
+          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
+              SizedBox(height: 10,),
+              Text('Directions', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255))),
+              SizedBox(height: 10,),
+            ])
+        ),
+
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+            width: 100, 
+            margin: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 240, 229, 229),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child: InkWell(child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
+              children: [
+                SizedBox(height: 10,),
+                Icon(Icons.phone),
+                SizedBox(height: 10,),
+                Text('Call', style: TextStyle(fontSize: 18, color: Colors.black)),
+                SizedBox(height: 10,),
+              ]),
+              onTap: () async {
+                var number = results['formatted_phone_number'];
+                launch('tel://$number');
+              })
+          ),
+
+          Container(
+            width: 100, 
+            margin: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 240, 229, 229),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 10,),
+                Icon(Icons.bookmark),
+                SizedBox(height: 10,),
+                Text('Bookmark', style: TextStyle(fontSize: 18, color: Colors.black)),
+                SizedBox(height: 10,),
+              ])
+          ),
+
+          Container(
+            width: 100, 
+            margin: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 240, 229, 229),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child: InkWell(child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
+              children: [
+                SizedBox(height: 10,),
+                Icon(Icons.language),
+                SizedBox(height: 10,),
+                Text('More', style: TextStyle(fontSize: 18, color: Colors.black)),
+                SizedBox(height: 10,),
+              ]),
+              onTap: () async {
+                var website = results['website'];
+                launch(website);
+              })
+          )
+        ],),
+
+        SizedBox(height: 10,),
+
+        Text('   Hours', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+
+        SizedBox(height: 5,),
+
+        if (results.containsKey('opening_hours') &&  results['opening_hours'].containsKey('weekday_text')) ...[
+          for (var i = 0; i < results['opening_hours']['weekday_text'].length; i++) Text('   ' + results['opening_hours']['weekday_text'][i], style: TextStyle(fontSize: 16, color: Colors.black)), 
+        ]
+        else ...[
+          for (var i = 0; i < defaultHours.length; i++) Text('   ' + defaultHours[i], style: TextStyle(fontSize: 16, color: Colors.black)), 
+        ],
+
+        SizedBox(height: 15,),
+
+        Text('   Address', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+
+        SizedBox(height: 5,),
+
+        Padding(padding: EdgeInsets.only(left:13), child:
+          Text(results['formatted_address'], style: TextStyle(fontSize: 16, color: Colors.black)),),
+
+        SizedBox(height: 15,),
+
+        Text('   Useful to Know', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+
+        Padding(padding: EdgeInsets.only(left:13), child:
+          Column(children: [
+            for (var i in ['Sanitary Pads', 'Tampons', 'Pregnancy Test', 'Condoms']) Row(children: [Icon(Icons.check), Text('  ' + i, style: TextStyle(fontSize: 16, color: Colors.black))]), 
+            Row(children: [
+              Icon(Icons.close),
+              Text('  Available Medical Professionals', style: TextStyle(fontSize: 16, color: Colors.black)),
+            ],),
+          ],)
+        ),
+
+        SizedBox(height: 15,),
+
+        Text('   Similar Locations', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+
+        // ListView(
+        //   children: <Widget>[
+        //     Container(
+        //       height: 80.0,
+        //       child: ListView(
+        //         scrollDirection: Axis.horizontal,
+        //         children: List.generate(10, (int index) {
+        //           return Card(
+        //             color: Colors.blue[index * 100],
+        //             child: Container(
+        //               width: 50.0,
+        //               height: 50.0,
+        //               child: Text("$index"),
+        //             ),
+        //           );
+        //         }),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+
+        Padding(padding: EdgeInsets.only(left:13, right: 13), child: SingleChildScrollView(scrollDirection: Axis.horizontal, child: 
+          Row(children: [
+            for (var i=0; i<5; i++)
+            if (allResults[i]!=results) ...[
+            Padding(padding: EdgeInsets.only(right: 13), child: InkWell(child: Container(
+              width: 200,
+              height: 115, 
+              margin: const EdgeInsets.only(top: 5),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 240, 229, 229),
+                borderRadius: BorderRadius.circular(12)
+              ),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
+                children: [
+                  SizedBox(height: 10,),
+                  Padding(padding: EdgeInsets.only(left: 5, right: 5) ,child: Text(allResults[i]['name'], textAlign: TextAlign.center, style: TextStyle(fontSize: 18, color: Colors.black))),
+                  SizedBox(height: 10,),
+                  Text(getDistance(allResults[i]['geometry']['location']['lat'], allResults[i]['geometry']['location']['lng']) + ' • Rating: ' + allResults[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+                  SizedBox(height: 10,),
+                ]),
+            ),
+            onTap: () => pageRequested(allResults[i], allResults)),)
+            ]
+          ],)
+        ))
+      ])
+  );
+
+  String getStars(results) {
+    var level = results['price_level'];
+
+    if (results.containsKey('price_level')) {
+      if (level == 0) {
+        return '\$';
+      }
+
+      else {
+        return '\$'*level;
+      }
+    }
+
+    return '\$';
+  }
 }
