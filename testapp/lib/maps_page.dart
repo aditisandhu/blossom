@@ -181,7 +181,7 @@ class MapSampleState extends State<MapSample> {
               textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(hintText: 'Search Maps'),
               onChanged: (value) {
-                print(value);
+                // print(value);
               },
             )),
           ],),
@@ -233,8 +233,8 @@ class MapSampleState extends State<MapSample> {
   );
 
   pageRequested(results, allResults) {
-    print(results);
-    print(results.keys.toList()..sort());
+    // print(results);
+    // print(results.keys.toList()..sort());
     setState(() {
       pageRequestedFlag = true;
       pageRequestedResults = results;

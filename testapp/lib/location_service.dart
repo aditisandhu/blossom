@@ -15,7 +15,7 @@ class LocationService {
 
     var placeId = json['candidates'][0]['places_id'] as String;
 
-    print(placeId);
+    // print(placeId);
 
     return placeId;
   }
@@ -32,7 +32,7 @@ class LocationService {
     var places = [];
 
     for (var i = 0; i < results.length; i++) {
-      print(results[i]);
+      // print(results[i]);
 
       var placeId = results[i]['place_id'];
     
@@ -42,11 +42,11 @@ class LocationService {
       var placeJson = convert.jsonDecode(placeResponse.body);
       var placeResults = placeJson['result'];
 
-      print(placeResults);
+      // print(placeResults);
 
       places.add(placeResults);
     }
-    print(places);
+    // print(places);
     return places;
   }
 

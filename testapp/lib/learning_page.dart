@@ -40,7 +40,7 @@ class LearningPage extends StatelessWidget {
           children: [
             const SizedBox(height: 32),
             Text(
-              question?.text,
+              question?.text ?? 'Placeholder Text',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             SizedBox(height: 8),
