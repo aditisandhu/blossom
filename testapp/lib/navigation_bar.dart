@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'learning_page.dart';
 import 'home_page.dart';
 import 'maps_page.dart';
-import 'option.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> {
       'Page 2: Track',
       style: optionStyle,
     ),
-    LearningPage(category: null, controller: null, onChangedPage: (int value) {  },onClickedOption: (Option value) {  },),
+    LearningPage(),
     MapSample(),
     Text(
       'Page 5: Profile',
