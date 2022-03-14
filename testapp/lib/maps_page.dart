@@ -6,9 +6,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import './location_service.dart';
-import './menstrual_icons_icons.dart';
+import './new_menstrual_icons_icons.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
@@ -27,6 +28,24 @@ class MapSampleState extends State<MapSample> {
   var geoLocator = Geolocator();
   dynamic pharmacies;
 
+  Set<Marker> markers = Set();
+  Set<Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+  String googleAPIKey = 'AIzaSyAi9LUQc127AeXYJGrV7Ib24FFw64o-C2w';
+
+    // ignore: prefer_const_declarations
+  static final CameraPosition _kGooglePlex = const CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  TextEditingController _searchController = TextEditingController();
+  bool flag = false;
+  bool pageRequestedFlag = false;
+  dynamic pageRequestedResults;
+  dynamic pageRequestedAllResults;
+
   void locatePosition() async {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     currentPosition = position;
@@ -42,8 +61,6 @@ class MapSampleState extends State<MapSample> {
     });
   }
 
-  Set<Marker> markers = Set();
-
   void setMarker(dynamic result) {
     setState(() {
       for (var i = 0; i < result.length; i++) {
@@ -56,6 +73,43 @@ class MapSampleState extends State<MapSample> {
           icon: BitmapDescriptor.defaultMarker, //Icon for Marker
         ));
       }
+    });
+  }
+
+  void setRouteMarkers(origin, destination) {
+    setState(() {
+      markers.add(Marker( //add first marker
+        markerId: MarkerId('Origin'),
+        position: LatLng(origin.latitude, origin.longitude), //position of marker
+        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+      ));
+      markers.add(Marker( //add first marker
+        markerId: MarkerId('Destination'),
+        position: LatLng(destination.latitude, destination.longitude), //position of marker
+        icon: BitmapDescriptor.defaultMarkerWithHue(90), //Icon for Marker
+      ));
+    });
+  }
+
+  setPolylines(origin, destination) async {
+    var result = await polylinePoints.getRouteBetweenCoordinates(
+      googleAPIKey,
+      PointLatLng(origin.latitude, origin.longitude),
+      PointLatLng(destination.latitude, destination.longitude));
+
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+
+    setState(() {
+      Polyline polyline = Polyline(
+          polylineId: PolylineId("poly"),
+          color: Color.fromARGB(255, 3, 58, 90),
+          points: polylineCoordinates);
+
+      polylines.add(polyline);
     });
   }
 
@@ -77,21 +131,11 @@ class MapSampleState extends State<MapSample> {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     var result = await LocationService().getPlace(textToSearch, position.latitude, position.longitude);
     
-    Set<Marker> markers = Set();
+    markers = Set();
+    polylines = {};
+    polylineCoordinates = [];
     setMarker(result);
   }
-
-  // ignore: prefer_const_declarations
-  static final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
-  TextEditingController _searchController = TextEditingController();
-  bool flag = false;
-  bool pageRequestedFlag = false;
-  dynamic pageRequestedResults;
-  dynamic pageRequestedAllResults;
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +157,7 @@ class MapSampleState extends State<MapSample> {
             zoomGesturesEnabled: true,
             zoomControlsEnabled: true,
             markers: markers,
+            polylines: polylines,
               
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
@@ -129,31 +174,38 @@ class MapSampleState extends State<MapSample> {
           label: const Text('My Location'),
           icon: const Icon(Icons.location_history),
         ),
+
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterTop,
     );
   }
 
   Widget PanelWidget(ScrollController controller) {
-    return ListView(
-      padding: EdgeInsets.zero,
-      controller: controller,
-      children: <Widget>[
-        SizedBox(height: 15,),
+    return Container(
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 243, 239, 239),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+      ),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        controller: controller,
+        children: <Widget>[
+          SizedBox(height: 15,),
 
-        buildDragHandle(),
+          buildDragHandle(),
 
-        if (pageRequestedFlag) ...[
-          SizedBox(height: 5,),
-          pageWidget(pageRequestedResults, pageRequestedAllResults)
-        ] 
-        
-        else ...[
-          slidingPanelHome(),
+          if (pageRequestedFlag) ...[
+            SizedBox(height: 5,),
+            pageWidget(pageRequestedResults, pageRequestedAllResults)
+          ] 
+          
+          else ...[
+            slidingPanelHome(),
+          ],
+
+          SizedBox(height: 24,),
         ],
-
-        SizedBox(height: 24,),
-      ],
-  );   
+  ),
+    );   
   }
 
   Widget buildDragHandle() => Center(
@@ -181,20 +233,64 @@ class MapSampleState extends State<MapSample> {
               textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(hintText: 'Search Maps'),
               onChanged: (value) {
-                print(value);
+                // print(value);
               },
             )),
-          ],),
+            InkWell(child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 237, 211, 210),
+                borderRadius: BorderRadius.circular(12)
+              ),
+              width: 89, 
+              height: 38, 
+              padding: const EdgeInsets.all(10),
+              child: Text('Clear Map', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black))),
+            onTap: () {
+              setState(() {
+                markers = Set();
+                polylines = {};
+              });
+            },
+          )],),
           
           SizedBox(height: 20,),
 
-          Row(children: [
-            IconButton(onPressed: () => search("sanitary pads"), icon: Icon(MenstrualIcons.pad),          iconSize: 40,),
-            IconButton(onPressed: () => search("tampons"), icon: Icon(MenstrualIcons.tampon),       iconSize: 40,),
-            IconButton(onPressed: () => search("contraception"), icon: Icon(MenstrualIcons.pills),        iconSize: 40,),
-            IconButton(onPressed: () => search("condoms"), icon: Icon(MenstrualIcons.condom),       iconSize: 40,),
-            IconButton(onPressed: () => search("pharmacy"), icon: Icon(MenstrualIcons.pharmacy),     iconSize: 40,),
-            IconButton(onPressed: () => search("doctor"), icon: Icon(MenstrualIcons.sthethoscope), iconSize: 40,),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 2, 42, 59),
+                shape: BoxShape.circle
+              ),
+              child: IconButton(onPressed: () => search("sanitary pads"), icon: Icon(NewMenstrualIcons.pad, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 2, 42, 59),
+                shape: BoxShape.circle
+              ),
+              child: IconButton(onPressed: () => search("tampon"), icon: Icon(NewMenstrualIcons.tampon, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 2, 42, 59),
+                shape: BoxShape.circle
+              ),
+              child: IconButton(onPressed: () => search("contraception"), icon: Icon(NewMenstrualIcons.birthcontrol, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 2, 42, 59),
+                shape: BoxShape.circle
+              ),
+              child: IconButton(onPressed: () => search("pharmacy"), icon: Icon(NewMenstrualIcons.stethoscope, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 2, 42, 59),
+                shape: BoxShape.circle
+              ),
+              child: IconButton(onPressed: () => search("doctor"), icon: Icon(NewMenstrualIcons.family, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+            ),
           ],),
 
           SizedBox(height: 20,),
@@ -219,22 +315,30 @@ class MapSampleState extends State<MapSample> {
   Widget nearBy(i) => Container(
     width: double.infinity, 
     margin: const EdgeInsets.all(10),
-    color: Color.fromARGB(255, 237, 211, 210),
-    child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-      children: [
-        Text(pharmacies[i]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-        SizedBox(height: 15,),
-        Text(pharmacies[i]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text('Distance: ' + getDistance(pharmacies[i]['geometry']['location']['lat'], pharmacies[i]['geometry']['location']['lng']) + ' • Rating: ' + pharmacies[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-          IconButton(onPressed: () => pageRequested(pharmacies[i], pharmacies), icon: Icon(Icons.arrow_forward, size: 25,))
-        ],)
-    ]),
+    decoration: BoxDecoration(
+      color: Color.fromARGB(255, 237, 211, 210),
+      border: Border.all(
+        color: Color.fromARGB(255, 237, 211, 210),
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(20))
+    ),
+    child: Padding(padding: EdgeInsets.all(15),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
+        children: [
+          Text(pharmacies[i]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
+          SizedBox(height: 15,),
+          Text(pharmacies[i]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text('Distance: ' + getDistance(pharmacies[i]['geometry']['location']['lat'], pharmacies[i]['geometry']['location']['lng']) + ' • Rating: ' + pharmacies[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+            IconButton(onPressed: () => pageRequested(pharmacies[i], pharmacies), icon: Icon(Icons.arrow_forward, size: 25,))
+          ],)
+      ]),
+    ),
   );
 
   pageRequested(results, allResults) {
-    print(results);
-    print(results.keys.toList()..sort());
+    // print(results);
+    // print(results.keys.toList()..sort());
     setState(() {
       pageRequestedFlag = true;
       pageRequestedResults = results;
@@ -276,20 +380,37 @@ class MapSampleState extends State<MapSample> {
         Text('     Sanitary Products   •   ' + getDistance(results['geometry']['location']['lat'], results['geometry']['location']['lng']) + '   •   ' + results['rating'].toString() + ' ☆   •   ' + getStars(results), 
           style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
 
-        Container(
-          width: double.infinity, 
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 2, 42, 59),
-            borderRadius: BorderRadius.circular(12)
+        InkWell(
+          child: Container(
+            width: double.infinity, 
+            margin: const EdgeInsets.all(10),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 2, 42, 59),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
+                children: [
+                  SizedBox(height: 10,),
+                  Text('Directions', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255))),
+                  SizedBox(height: 10,),
+                ]),
           ),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-            children: [
-              SizedBox(height: 10,),
-              Text('Directions', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255))),
-              SizedBox(height: 10,),
-            ])
+          onTap: () {
+              print('can you see me');
+              markers = Set();
+              polylines = {};
+              polylineCoordinates = [];
+              setRouteMarkers(
+                LatLng(currentPosition.latitude, 
+                      currentPosition.longitude),
+                LatLng(results['geometry']['location']['lat'], 
+                      results['geometry']['location']['lng']));
+              setPolylines(
+                LatLng(currentPosition.latitude, 
+                      currentPosition.longitude),
+                LatLng(results['geometry']['location']['lat'], 
+                      results['geometry']['location']['lng']));}
         ),
 
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -395,27 +516,6 @@ class MapSampleState extends State<MapSample> {
         SizedBox(height: 15,),
 
         Text('   Similar Locations', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
-
-        // ListView(
-        //   children: <Widget>[
-        //     Container(
-        //       height: 80.0,
-        //       child: ListView(
-        //         scrollDirection: Axis.horizontal,
-        //         children: List.generate(10, (int index) {
-        //           return Card(
-        //             color: Colors.blue[index * 100],
-        //             child: Container(
-        //               width: 50.0,
-        //               height: 50.0,
-        //               child: Text("$index"),
-        //             ),
-        //           );
-        //         }),
-        //       ),
-        //     ),
-        //   ],
-        // ),
 
         Padding(padding: EdgeInsets.only(left:13, right: 13), child: SingleChildScrollView(scrollDirection: Axis.horizontal, child: 
           Row(children: [

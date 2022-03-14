@@ -41,6 +41,7 @@ dependencies:
   http: ^0.13.4
   sliding_up_panel: ^2.0.0+1
   url_launcher: ^6.0.20
+  flutter_polyline_points: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -81,9 +82,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: MenstrualIcons
+    - family: NewMenstrualIcons
       fonts:
-        - asset: icons/MenstrualIcons.ttf
+        - asset: icons/NewMenstrualIcons.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
