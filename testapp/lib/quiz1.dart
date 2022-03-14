@@ -11,7 +11,7 @@ class PeriodQuiz{
     "Why does blood come out during the period?",
     "An individual can get pregnant while on their period.",
     "What foods are good to eat during the period?",
-    "No, because sperm cannot live inside an individual after ejaculation.",
+    "What are blood clots and why do they occur?",
   ];
 
 
@@ -30,8 +30,8 @@ class PeriodQuiz{
      "Coffee"],
     ["Blood clots are large eggs. They occur when the body is unable to thin the material coming out of the uterus slow enough.",
      "Blood clots are small eggs. They occur when the body is unable to thin the material coming out of the uterus fast enough.",
-     "Blood clots are large blobs tissue and blood. They occur when the body is unable to thin the material coming out of the uterus slow enough.",
-     "Blood clots are small blobs tissue and blood. They occur when the body is unable to thin the material coming out of the uterus fast enough."]
+     "Blood clots are large blobs of tissue and blood. They occur when the body does not thin the material coming out slow enough.",
+     "Blood clots are small blobs of tissue and blood. They occur when the body does not thin the material coming out fast enough."]
   ];
 
 
@@ -97,46 +97,52 @@ class Quiz1State extends State<Quiz1> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     //button 1
-                    MaterialButton(
-                      minWidth: 120.0,
-                      color: Colors.blueGrey,
-                      onPressed: (){
-                        if(quiz.choices[questionNumber][0] == quiz.correctAnswers[questionNumber]){
-                          debugPrint("Correct");
-                          finalScore++;
-                        }else{
-                          debugPrint("Wrong");
-                        }
-                        updateQuestion();
-                      },
-                      
-                      child: Text(quiz.choices[questionNumber][0],
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white
-                        ),),
+                    Container(
+                      width: 180.0,
+                      height: 240.0,
+                      child: MaterialButton(
+                        color: Colors.blueGrey,
+                        onPressed: (){
+                          if(quiz.choices[questionNumber][0] == quiz.correctAnswers[questionNumber]){
+                            debugPrint("Correct");
+                            finalScore++;
+                          }else{
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                        
+                        child: Text(quiz.choices[questionNumber][0],
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                          ),),
+                      ),
                     ),
 
                     //button 2
-                    MaterialButton(
-                      minWidth: 120.0,
-                      color: Colors.blueGrey,
-                      onPressed: (){
-
-                        if(quiz.choices[questionNumber][1] == quiz.correctAnswers[questionNumber]){
-                          debugPrint("Correct");
-                          finalScore++;
-                        }else{
-                          debugPrint("Wrong");
-                        }
-                        updateQuestion();
-                      },
-                     
-                      child: Text(quiz.choices[questionNumber][1],
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white
-                        ),),
+                    Container(
+                      width: 180.0,
+                      height: 240.0,
+                      child: MaterialButton(
+                        color: Colors.blueGrey,
+                        onPressed: (){
+                    
+                          if(quiz.choices[questionNumber][1] == quiz.correctAnswers[questionNumber]){
+                            debugPrint("Correct");
+                            finalScore++;
+                          }else{
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                       
+                        child: Text(quiz.choices[questionNumber][1],
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                          ),),
+                      ),
                     ),
 
                   ],
@@ -149,47 +155,53 @@ class Quiz1State extends State<Quiz1> {
                   children: <Widget>[
 
                     //button 3
-                    MaterialButton(
-                      minWidth: 120.0,
-                      color: Colors.blueGrey,
-                      onPressed: (){
-
-                        if(quiz.choices[questionNumber][2] == quiz.correctAnswers[questionNumber]){
-                          debugPrint("Correct");
-                          finalScore++;
-                        }else{
-                          debugPrint("Wrong");
-                        }
-                        updateQuestion();
-                      },
+                    Container(
+                      width: 180.0,
+                      height: 240.0,
+                      child: MaterialButton(
+                        color: Colors.blueGrey,
+                        onPressed: (){
                     
-                      child: Text(quiz.choices[questionNumber][2],
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white
-                        ),),
+                          if(quiz.choices[questionNumber][2] == quiz.correctAnswers[questionNumber]){
+                            debugPrint("Correct");
+                            finalScore++;
+                          }else{
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                      
+                        child: Text(quiz.choices[questionNumber][2],
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                          ),),
+                      ),
                     ),
 
                     //button 4
-                    MaterialButton(
-                      minWidth: 120.0,
-                      color: Colors.blueGrey,
-                      onPressed: (){
-
-                        if(quiz.choices[questionNumber][3] == quiz.correctAnswers[questionNumber]){
-                          debugPrint("Correct");
-                          finalScore++;
-                        }else{
-                          debugPrint("Wrong");
-                        }
-                        updateQuestion();
-                      },
-                 
-                      child: Text(quiz.choices[questionNumber][3],
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white
-                        ),),
+                    Container(
+                      width: 180.0,
+                      height: 240.0,
+                      child: MaterialButton(
+                        color: Colors.blueGrey,
+                        onPressed: (){
+                    
+                          if(quiz.choices[questionNumber][3] == quiz.correctAnswers[questionNumber]){
+                            debugPrint("Correct");
+                            finalScore++;
+                          }else{
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                                     
+                        child: Text(quiz.choices[questionNumber][3],
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                          ),),
+                      ),
                     ),
 
                   ],
