@@ -16,6 +16,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Home(),
+      theme: ThemeData(
+        fontFamily: 'OpenSans'
+      ),
     );
   }
 }
