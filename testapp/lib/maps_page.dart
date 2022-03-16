@@ -538,7 +538,7 @@ class MapSampleState extends State<MapSample> {
             if (allResults[i]!=results) ...[
             Padding(padding: EdgeInsets.only(right: 13), child: InkWell(child: Container(
               width: 200,
-              height: 115, 
+              height: 130, 
               margin: const EdgeInsets.only(top: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(

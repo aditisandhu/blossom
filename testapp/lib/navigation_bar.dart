@@ -3,18 +3,18 @@ import 'learning_page.dart';
 import 'home_page.dart';
 import 'maps_page.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class NavHome extends StatefulWidget {
+  const NavHome({Key? key}) : super(key: key);
 
   @override
   State createState() {
-    return _HomeState();
+    return NavHomeState();
   }
 }
 
-class _HomeState extends State<Home> {
+class NavHomeState extends State<NavHome> {
 
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
@@ -28,15 +28,11 @@ class _HomeState extends State<Home> {
     ),
     LearningPage(),
     MapSample(),
-    Text(
-      'Page 5: Profile',
-      style: optionStyle,
-    ),
   ];
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
@@ -44,7 +40,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _selectedIndex,
+        index: selectedIndex,
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -65,14 +61,10 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.location_on, color: Colors.black,),
             label: 'Map',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black,),
-            label: 'Profile',
-          ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
+        onTap: onItemTapped,
       ),
     );
   }
