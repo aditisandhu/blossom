@@ -13,7 +13,7 @@ class LearningPageState extends State<LearningPage>{
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       title: Text("Multiple Choice Quiz"),
+       title: const Text("Multiple Choice Quiz"),
        backgroundColor: Colors.blue,
      ),
 
@@ -30,7 +30,7 @@ class LearningPageState extends State<LearningPage>{
              height: 50.0,
                color: Colors.pink,
                onPressed: startQuiz,
-               child: Text("Quiz 1", style: TextStyle(fontSize: 18.0, color: Colors.white))
+               child: const Text("Quiz 1", style: TextStyle(fontSize: 18.0, color: Colors.white))
            )
          ],
        ),

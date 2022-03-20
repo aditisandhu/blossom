@@ -21,13 +21,13 @@ class NavHomeState extends State<NavHome> {
 
   // ignore: prefer_final_fields
   static List<Widget> _pages = <Widget>[
-    MyHomePage(title: 'Home Page'),
-    Text(
+    const MyHomePage(title: 'Home Page'),
+    const Text(
       'Page 2: Track',
       style: optionStyle,
     ),
     LearningPage(),
-    MapSample(),
+    const MapSample(),
   ];
 
   void onItemTapped(int index) {

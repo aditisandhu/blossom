@@ -63,7 +63,7 @@ class Quiz1State extends State<Quiz1> {
             alignment: Alignment.topCenter,
             child: Column(
               children: <Widget>[
-                Padding(padding: EdgeInsets.all(20.0)),
+                const Padding(padding: const EdgeInsets.all(20.0)),
 
                 Container(
                   alignment: Alignment.centerRight,
@@ -72,26 +72,26 @@ class Quiz1State extends State<Quiz1> {
                     children: <Widget>[
 
                       Text("Question ${questionNumber + 1} of ${quiz.questions.length}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 22.0
                         ),),
 
                       Text("Score: $finalScore",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 22.0
                         ),)
                     ],
                   ),
                 ),
 
-                Padding(padding: EdgeInsets.all(10.0)),
+                const Padding(padding: EdgeInsets.all(10.0)),
 
                 Text(quiz.questions[questionNumber],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),),
 
-                Padding(padding: EdgeInsets.all(10.0)),
+                const Padding(padding: const EdgeInsets.all(10.0)),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,7 +113,7 @@ class Quiz1State extends State<Quiz1> {
                         },
                         
                         child: Text(quiz.choices[questionNumber][0],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20.0,
                               color: Colors.white
                           ),),
@@ -138,7 +138,7 @@ class Quiz1State extends State<Quiz1> {
                         },
                        
                         child: Text(quiz.choices[questionNumber][1],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20.0,
                               color: Colors.white
                           ),),
@@ -148,7 +148,7 @@ class Quiz1State extends State<Quiz1> {
                   ],
                 ),
 
-                Padding(padding: EdgeInsets.all(10.0)),
+                const Padding(padding: EdgeInsets.all(10.0)),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -172,7 +172,7 @@ class Quiz1State extends State<Quiz1> {
                         },
                       
                         child: Text(quiz.choices[questionNumber][2],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20.0,
                               color: Colors.white
                           ),),
@@ -197,7 +197,7 @@ class Quiz1State extends State<Quiz1> {
                         },
                                      
                         child: Text(quiz.choices[questionNumber][3],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20.0,
                               color: Colors.white
                           ),),
@@ -207,7 +207,7 @@ class Quiz1State extends State<Quiz1> {
                   ],
                 ),
 
-                Padding(padding: EdgeInsets.all(15.0)),
+                const Padding(padding: const EdgeInsets.all(15.0)),
 
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -216,7 +216,7 @@ class Quiz1State extends State<Quiz1> {
                       height: 30.0,
                       color: Colors.red,
                       onPressed: resetQuiz,
-                      child: Text("Quit",
+                      child: const Text("Quit",
                         style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.white
@@ -274,11 +274,11 @@ class Summary extends StatelessWidget{
             children: <Widget>[
 
               Text("Final Score: $score",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 35.0
                 ),),
 
-              Padding(padding: EdgeInsets.all(30.0)),
+              const Padding(padding: EdgeInsets.all(30.0)),
 
               MaterialButton(
                 color: Colors.red,
@@ -287,7 +287,7 @@ class Summary extends StatelessWidget{
                   finalScore = 0;
                   Navigator.pop(context);
                 },
-                child: Text("Reset Quiz",
+                child: const Text("Reset Quiz",
                   style: TextStyle(
                       fontSize: 20.0,
                       color: Colors.white

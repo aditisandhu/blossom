@@ -55,8 +55,8 @@ class MapSampleState extends State<MapSample> {
   }
 
   void setCustomMarker() async {
-    originMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), 'assets/origin.png');
-    destinationMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), 'assets/destination.png');
+    originMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/origin.png');
+    destinationMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/destination.png');
   }
 
 
@@ -93,12 +93,12 @@ class MapSampleState extends State<MapSample> {
   void setRouteMarkers(origin, destination) {
     setState(() {
       markers.add(Marker( //add first marker
-        markerId: MarkerId('Origin'),
+        markerId: const MarkerId('Origin'),
         position: LatLng(origin.latitude, origin.longitude), //position of marker
         icon: originMarker, //Icon for Marker
       ));
       markers.add(Marker( //add first marker
-        markerId: MarkerId('Destination'),
+        markerId: const MarkerId('Destination'),
         position: LatLng(destination.latitude, destination.longitude), //position of marker
         icon: destinationMarker, //Icon for Marker
       ));
@@ -119,8 +119,8 @@ class MapSampleState extends State<MapSample> {
 
     setState(() {
       Polyline polyline = Polyline(
-          polylineId: PolylineId("poly"),
-          color: Color.fromARGB(255, 238, 170, 168),
+          polylineId: const PolylineId("poly"),
+          color: const Color.fromARGB(255, 238, 170, 168),
           points: polylineCoordinates);
 
       polylines.add(polyline);
@@ -158,7 +158,7 @@ class MapSampleState extends State<MapSample> {
       body: SlidingUpPanel(
         minHeight: 80,
         maxHeight: MediaQuery.of(context).size.height*0.8,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
         parallaxEnabled: true,
         parallaxOffset: 0.5,
 
@@ -196,7 +196,7 @@ class MapSampleState extends State<MapSample> {
 
   Widget PanelWidget(ScrollController controller) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 242, 242, 242),
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
       ),
@@ -204,12 +204,12 @@ class MapSampleState extends State<MapSample> {
         padding: EdgeInsets.zero,
         controller: controller,
         children: <Widget>[
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           buildDragHandle(),
 
           if (pageRequestedFlag) ...[
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             pageWidget(pageRequestedResults, pageRequestedAllResults)
           ] 
           
@@ -217,7 +217,7 @@ class MapSampleState extends State<MapSample> {
             slidingPanelHome(),
           ],
 
-          SizedBox(height: 24,),
+          const SizedBox(height: 24,),
         ],
   ),
     );   
@@ -235,31 +235,31 @@ class MapSampleState extends State<MapSample> {
   );
 
   Widget slidingPanelHome() => Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
           Row(children: [
             IconButton(
               onPressed: () => search(_searchController.text), 
-              icon: Icon(Icons.search),),
+              icon: const Icon(Icons.search),),
             Expanded(child: TextFormField(
               controller: _searchController,
               textCapitalization: TextCapitalization.words,
-              decoration: InputDecoration(hintText: 'Search Maps'),
+              decoration: const InputDecoration(hintText: 'Search Maps'),
               onChanged: (value) {
                 // print(value);
               },
             )),
             InkWell(child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 2, 42, 59),
+                color: const Color.fromARGB(255, 2, 42, 59),
                 borderRadius: BorderRadius.circular(12)
               ),
               width: 89, 
               height: 38, 
               padding: const EdgeInsets.all(10),
-              child: Text('Clear Map', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color.fromARGB(255, 255, 255, 255)))),
+              child: const Text('Clear Map', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color.fromARGB(255, 255, 255, 255)))),
             onTap: () {
               setState(() {
                 markers = Set();
@@ -268,51 +268,51 @@ class MapSampleState extends State<MapSample> {
             },
           )],),
           
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
 
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 2, 42, 59),
                 shape: BoxShape.circle
               ),
-              child: IconButton(onPressed: () => search("sanitary pads"), icon: Icon(NewMenstrualIcons.pad, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+              child: IconButton(onPressed: () => search("sanitary pads"), icon: const Icon(NewMenstrualIcons.pad, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 2, 42, 59),
                 shape: BoxShape.circle
               ),
-              child: IconButton(onPressed: () => search("tampon"), icon: Icon(NewMenstrualIcons.tampon, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+              child: IconButton(onPressed: () => search("tampon"), icon: const Icon(NewMenstrualIcons.tampon, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 2, 42, 59),
                 shape: BoxShape.circle
               ),
-              child: IconButton(onPressed: () => search("contraception"), icon: Icon(NewMenstrualIcons.birthcontrol, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+              child: IconButton(onPressed: () => search("contraception"), icon: const Icon(NewMenstrualIcons.birthcontrol, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 2, 42, 59),
                 shape: BoxShape.circle
               ),
-              child: IconButton(onPressed: () => search("pharmacy"), icon: Icon(NewMenstrualIcons.stethoscope, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+              child: IconButton(onPressed: () => search("pharmacy"), icon: const Icon(NewMenstrualIcons.stethoscope, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 2, 42, 59),
                 shape: BoxShape.circle
               ),
-              child: IconButton(onPressed: () => search("doctor"), icon: Icon(NewMenstrualIcons.family, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
+              child: IconButton(onPressed: () => search("doctor"), icon: const Icon(NewMenstrualIcons.family, color: Color.fromARGB(255, 255, 255, 255),), iconSize: 40,)
             ),
           ],),
 
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
 
-          Text('  Near Me', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
+          const Text('  Near Me', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
 
           if (flag) ...[
 
@@ -331,21 +331,21 @@ class MapSampleState extends State<MapSample> {
     width: double.infinity, 
     margin: const EdgeInsets.all(10),
     decoration: BoxDecoration(
-      color: Color.fromARGB(255, 237, 211, 210),
+      color: const Color.fromARGB(255, 237, 211, 210),
       border: Border.all(
-        color: Color.fromARGB(255, 237, 211, 210),
+        color: const Color.fromARGB(255, 237, 211, 210),
       ),
-      borderRadius: BorderRadius.all(Radius.circular(20))
+      borderRadius: const BorderRadius.all(Radius.circular(20))
     ),
-    child: Padding(padding: EdgeInsets.all(15),
+    child: Padding(padding: const EdgeInsets.all(15),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
         children: [
-          Text(pharmacies[i]['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
-          SizedBox(height: 15,),
-          Text(pharmacies[i]['formatted_address'], style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+          Text(pharmacies[i]['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 2, 42, 59))),
+          const SizedBox(height: 15,),
+          Text(pharmacies[i]['formatted_address'], style: const TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text('Distance: ' + getDistance(pharmacies[i]['geometry']['location']['lat'], pharmacies[i]['geometry']['location']['lng']) + ' • Rating: ' + pharmacies[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-            IconButton(onPressed: () => pageRequested(pharmacies[i], pharmacies), icon: Icon(Icons.arrow_forward, size: 25,))
+            Text('Distance: ' + getDistance(pharmacies[i]['geometry']['location']['lat'], pharmacies[i]['geometry']['location']['lng']) + ' • Rating: ' + pharmacies[i]['rating'].toString(), style: const TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+            IconButton(onPressed: () => pageRequested(pharmacies[i], pharmacies), icon: const Icon(Icons.arrow_forward, size: 25,))
           ],)
       ]),
     ),
@@ -378,22 +378,22 @@ class MapSampleState extends State<MapSample> {
   ];
 
   Widget pageWidget(results, allResults) => Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(children: [
-          IconButton(onPressed: () => homeRequested(), icon: Icon(Icons.arrow_back, size: 25,)),
+          IconButton(onPressed: () => homeRequested(), icon: const Icon(Icons.arrow_back, size: 25,)),
           
           Flexible(
-            child: Text(results['name'], maxLines: 2, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
+            child: Text(results['name'], maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color.fromARGB(255, 2, 42, 59))),
           )
         ],),
 
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
 
         Text('     Sanitary Products   •   ' + getDistance(results['geometry']['location']['lat'], results['geometry']['location']['lng']) + '   •   ' + results['rating'].toString() + ' ☆   •   ' + getStars(results), 
-          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+          style: const TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
 
         InkWell(
           child: Container(
@@ -401,11 +401,11 @@ class MapSampleState extends State<MapSample> {
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 2, 42, 59),
+              color: const Color.fromARGB(255, 2, 42, 59),
               borderRadius: BorderRadius.circular(12)
             ),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                children: [
+                children: const [
                   SizedBox(height: 10,),
                   Text('Directions', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255))),
                   SizedBox(height: 10,),
@@ -434,11 +434,11 @@ class MapSampleState extends State<MapSample> {
             margin: const EdgeInsets.all(5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 240, 229, 229),
+              color: const Color.fromARGB(255, 240, 229, 229),
               borderRadius: BorderRadius.circular(12)
             ),
             child: InkWell(child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
-              children: [
+              children: const [
                 SizedBox(height: 10,),
                 Icon(Icons.phone),
                 SizedBox(height: 10,),
@@ -456,11 +456,11 @@ class MapSampleState extends State<MapSample> {
             margin: const EdgeInsets.all(5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 240, 229, 229),
+              color: const Color.fromARGB(255, 240, 229, 229),
               borderRadius: BorderRadius.circular(12)
             ),
             child: Column(crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: const [
                 SizedBox(height: 10,),
                 Icon(Icons.bookmark),
                 SizedBox(height: 10,),
@@ -474,11 +474,11 @@ class MapSampleState extends State<MapSample> {
             margin: const EdgeInsets.all(5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 240, 229, 229),
+              color: const Color.fromARGB(255, 240, 229, 229),
               borderRadius: BorderRadius.circular(12)
             ),
             child: InkWell(child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
-              children: [
+              children: const [
                 SizedBox(height: 10,),
                 Icon(Icons.language),
                 SizedBox(height: 10,),
@@ -492,66 +492,66 @@ class MapSampleState extends State<MapSample> {
           )
         ],),
 
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
 
-        Text('   Hours', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+        const Text('   Hours', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
 
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
 
         if (results.containsKey('opening_hours') &&  results['opening_hours'].containsKey('weekday_text')) ...[
-          for (var i = 0; i < results['opening_hours']['weekday_text'].length; i++) Text('   ' + results['opening_hours']['weekday_text'][i], style: TextStyle(fontSize: 16, color: Colors.black)), 
+          for (var i = 0; i < results['opening_hours']['weekday_text'].length; i++) Text('   ' + results['opening_hours']['weekday_text'][i], style: const TextStyle(fontSize: 16, color: Colors.black)), 
         ]
         else ...[
-          for (var i = 0; i < defaultHours.length; i++) Text('   ' + defaultHours[i], style: TextStyle(fontSize: 16, color: Colors.black)), 
+          for (var i = 0; i < defaultHours.length; i++) Text('   ' + defaultHours[i], style: const TextStyle(fontSize: 16, color: Colors.black)), 
         ],
 
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
 
-        Text('   Address', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+        const Text('   Address', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
 
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
 
-        Padding(padding: EdgeInsets.only(left:13), child:
-          Text(results['formatted_address'], style: TextStyle(fontSize: 16, color: Colors.black)),),
+        Padding(padding: const EdgeInsets.only(left:13), child:
+          Text(results['formatted_address'], style: const TextStyle(fontSize: 16, color: Colors.black)),),
 
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
 
-        Text('   Useful to Know', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+        const Text('   Useful to Know', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
 
-        Padding(padding: EdgeInsets.only(left:13), child:
+        Padding(padding: const EdgeInsets.only(left:13), child:
           Column(children: [
-            for (var i in ['Sanitary Pads', 'Tampons', 'Pregnancy Test', 'Condoms']) Row(children: [Icon(Icons.check), Text('  ' + i, style: TextStyle(fontSize: 16, color: Colors.black))]), 
-            Row(children: [
+            for (var i in ['Sanitary Pads', 'Tampons', 'Pregnancy Test', 'Condoms']) Row(children: [const Icon(Icons.check), Text('  ' + i, style: const TextStyle(fontSize: 16, color: Colors.black))]), 
+            Row(children: const [
               Icon(Icons.close),
               Text('  Available Medical Professionals', style: TextStyle(fontSize: 16, color: Colors.black)),
             ],),
           ],)
         ),
 
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
 
-        Text('   Similar Locations', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
+        const Text('   Similar Locations', style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
 
-        Padding(padding: EdgeInsets.only(left:13, right: 13), child: SingleChildScrollView(scrollDirection: Axis.horizontal, child: 
+        Padding(padding: const EdgeInsets.only(left:13, right: 13), child: SingleChildScrollView(scrollDirection: Axis.horizontal, child: 
           Row(children: [
             for (var i=0; i<5; i++)
             if (allResults[i]!=results) ...[
-            Padding(padding: EdgeInsets.only(right: 13), child: InkWell(child: Container(
+            Padding(padding: const EdgeInsets.only(right: 13), child: InkWell(child: Container(
               width: 200,
               height: 130, 
               margin: const EdgeInsets.only(top: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 240, 229, 229),
+                color: const Color.fromARGB(255, 240, 229, 229),
                 borderRadius: BorderRadius.circular(12)
               ),
               child: Column(crossAxisAlignment: CrossAxisAlignment.center, 
                 children: [
-                  SizedBox(height: 10,),
-                  Padding(padding: EdgeInsets.only(left: 5, right: 5) ,child: Text(allResults[i]['name'], textAlign: TextAlign.center, style: TextStyle(fontSize: 18, color: Colors.black))),
-                  SizedBox(height: 10,),
-                  Text(getDistance(allResults[i]['geometry']['location']['lat'], allResults[i]['geometry']['location']['lng']) + ' • Rating: ' + allResults[i]['rating'].toString(), style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
+                  Padding(padding: const EdgeInsets.only(left: 5, right: 5) ,child: Text(allResults[i]['name'], textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, color: Colors.black))),
+                  const SizedBox(height: 10,),
+                  Text(getDistance(allResults[i]['geometry']['location']['lat'], allResults[i]['geometry']['location']['lng']) + ' • Rating: ' + allResults[i]['rating'].toString(), style: const TextStyle(fontSize: 15, color: Color.fromARGB(255, 2, 42, 59))),
+                  const SizedBox(height: 10,),
                 ]),
             ),
             onTap: () => pageRequested(allResults[i], allResults)),)

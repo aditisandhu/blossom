@@ -15,7 +15,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: NavHome(),
+      debugShowCheckedModeBanner: false,
+      home: const NavHome(),
       theme: ThemeData(
         fontFamily: 'OpenSans'
       ),

@@ -1,5 +1,12 @@
+// ignore_for_file: unused_import
+
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import './navigation_bar.dart';
+import './news.dart';
+import './news_widget.dart';
+import './article.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -13,6 +20,25 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   String username = 'Jinal';
   bool profilePageFlag = false;
+  var newslist;
+  bool _loading = true;
+
+  void getNews() async {
+    News news = News();
+    await news.getNews();
+    newslist = news.news;
+    setState(() {
+      _loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    _loading = true;
+    // TODO: implement initState
+    super.initState();
+    getNews();
+  }
 
   profilePageRequested() {
     setState(() {
@@ -43,56 +69,67 @@ class MyHomePageState extends State<MyHomePage> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                   
-                SizedBox(height: 70,),
-                Text("Welcome, ${username}!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromARGB(255, 2, 42, 59))),
+                const SizedBox(height: 70,),
+                Text("Welcome, ${username}!", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromARGB(255, 2, 42, 59))),
         
-                SizedBox(height: 40,),
-                Text("Daily Question", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
+                const SizedBox(height: 40,),
+                const Text("Daily Question", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
                 
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 237, 211, 210),
+                    color: const Color.fromARGB(255, 237, 211, 210),
                     border: Border.all(
-                      color: Color.fromARGB(255, 237, 211, 210),
+                      color: const Color.fromARGB(255, 237, 211, 210),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                    borderRadius: const BorderRadius.all(Radius.circular(20))
                   ),
+                  child: Center(child: Text('Add Question Here', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59)))),
+
                 ),
         
-                SizedBox(height: 40,),
-                Text("Key Accomplishments", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
+                const SizedBox(height: 40,),
+                const Text("Reminders", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
                 
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 237, 211, 210),
+                    color: const Color.fromARGB(255, 237, 211, 210),
                     border: Border.all(
-                      color: Color.fromARGB(255, 237, 211, 210),
+                      color: const Color.fromARGB(255, 237, 211, 210),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                    borderRadius: const BorderRadius.all(Radius.circular(20))
                   ),
+                  child: Center(child: Text('Next Cycle In:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59)))),
                 ),
         
-                SizedBox(height: 40,),
-                Text("Latest Stories", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
+                const SizedBox(height: 40,),
+                const Text("Latest Stories", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
                 
-                SizedBox(height: 10,),
-                for (int i=0; i<5; i++)
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 75,
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 237, 211, 210),
-                    border: Border.all(
-                      color: Color.fromARGB(255, 237, 211, 210),
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                SafeArea(
+                  child: _loading 
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container(
+                    margin: const EdgeInsets.only(top: 1),
+                    child: ListView.builder(
+                        itemCount: min(10, newslist.length),
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return NewsTile(
+                            imgUrl: newslist[index].urlToImage ?? "",
+                            title: newslist[index].title ?? "",
+                            desc: newslist[index].description ?? "",
+                            content: newslist[index].content ?? "",
+                            posturl: newslist[index].articleUrl ?? "",
+                          );
+                        }),
                   ),
                 ),
               ],
@@ -115,9 +152,9 @@ class MyHomePageState extends State<MyHomePage> {
         Container(padding: const EdgeInsets.all(20),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 80,),
+              const SizedBox(height: 80,),
 
-              Text("Name: ${username}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
+              Text("Name: ${username}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
 
             ]
           ),
