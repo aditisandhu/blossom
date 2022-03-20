@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/tracker.dart';
 import 'learning_page.dart';
 import 'home_page.dart';
 import 'maps_page.dart';
@@ -22,10 +23,7 @@ class NavHomeState extends State<NavHome> {
   // ignore: prefer_final_fields
   static List<Widget> _pages = <Widget>[
     const MyHomePage(title: 'Home Page'),
-    const Text(
-      'Page 2: Track',
-      style: optionStyle,
-    ),
+    TrackerHome(),
     LearningPage(),
     const MapSample(),
   ];
