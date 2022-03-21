@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/loginservice.dart';
+import 'package:testapp/splash.dart';
+import 'package:provider/provider.dart';
 
 import 'navigation_bar.dart';
+import 'start.dart';
 
 void main() {
   runApp(const App());
@@ -13,12 +17,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      debugShowCheckedModeBanner: false,
-      home: const NavHome(),
-      theme: ThemeData(
-        fontFamily: 'OpenSans'
+    return Provider(
+      create: (_) => LoginService(),
+      child: MaterialApp(
+        title: _title,
+        debugShowCheckedModeBanner: false,
+        home: SplashPage(duration: 2, goToPage: WelcomePage(),),
+        theme: ThemeData(
+          fontFamily: 'OpenSans'
+        ),
       ),
     );
   }

@@ -3,6 +3,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:testapp/LoginUserModel.dart';
+import 'package:testapp/loginservice.dart';
 import './navigation_bar.dart';
 import './news.dart';
 import './news_widget.dart';
@@ -54,6 +57,10 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    LoginService loginService = Provider.of<LoginService>(context, listen:false);
+    LoginUserModel userModel = loginService.loggedInUserModel;
+
     if (profilePageFlag) { return profilePage(); }
 
     else {
@@ -70,7 +77,7 @@ class MyHomePageState extends State<MyHomePage> {
               children: [
                   
                 const SizedBox(height: 70,),
-                Text("Welcome, ${username}!", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromARGB(255, 2, 42, 59))),
+                Text("Welcome, ${userModel.displayName}!", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromARGB(255, 2, 42, 59))),
         
                 const SizedBox(height: 40,),
                 const Text("Daily Question", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
@@ -117,19 +124,19 @@ class MyHomePageState extends State<MyHomePage> {
                       )
                     : Container(
                     margin: const EdgeInsets.only(top: 1),
-                    child: ListView.builder(
-                        itemCount: min(10, newslist.length),
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return NewsTile(
-                            imgUrl: newslist[index].urlToImage ?? "",
-                            title: newslist[index].title ?? "",
-                            desc: newslist[index].description ?? "",
-                            content: newslist[index].content ?? "",
-                            posturl: newslist[index].articleUrl ?? "",
-                          );
-                        }),
+                    width: double.infinity,
+                    child: SingleChildScrollView( scrollDirection: Axis.horizontal,
+                      child: Row(children: [
+                        for (int index=0; index<min(10, newslist.length); index++)
+                        NewsTile(
+                          imgUrl: newslist[index].urlToImage ?? "",
+                          title: newslist[index].title ?? "",
+                          desc: newslist[index].description ?? "",
+                          content: newslist[index].content ?? "",
+                          posturl: newslist[index].articleUrl ?? "",
+                        )
+                      ],),
+                    )
                   ),
                 ),
               ],
