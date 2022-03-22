@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 var finalScore = 0;
 var questionNumber = 0;
-var quiz = ConsentQuiz();
+var quiz = PeriodQuiz();
 
-class ConsentQuiz{
+class PeriodQuiz{
 
   var questions = [
     "Why does blood come out during the period?",
@@ -43,14 +43,14 @@ class ConsentQuiz{
   ];
 }
 
-class Quiz1 extends StatefulWidget{
+class Quiz2 extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return Quiz1State();
+    return Quiz2State();
   }
 }
 
-class Quiz1State extends State<Quiz1> {
+class Quiz2State extends State<Quiz2> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

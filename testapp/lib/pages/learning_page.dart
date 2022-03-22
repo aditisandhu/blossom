@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../helpers/quiz1.dart';
+import '../helpers/quiz2.dart';
 
 class LearningPage extends StatefulWidget{
   @override
@@ -12,11 +13,6 @@ class LearningPageState extends State<LearningPage>{
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-     appBar: AppBar(
-       title: const Text("Multiple Choice Quiz"),
-       backgroundColor: Colors.blue,
-     ),
-
 
      body: Container(
           margin: const EdgeInsets.all(15.0),
@@ -29,20 +25,30 @@ class LearningPageState extends State<LearningPage>{
            MaterialButton(
              height: 50.0,
                color: Colors.pink,
-               onPressed: startQuiz,
-               child: const Text("Quiz 1", style: TextStyle(fontSize: 18.0, color: Colors.white))
+               onPressed: startQuiz1,
+               child: const Text("Consent", style: TextStyle(fontSize: 18.0, color: Colors.white))
+           ),
+           MaterialButton(
+             height: 50.0,
+               color: Colors.pink,
+               onPressed: startQuiz2,
+               child: const Text("Periods", style: TextStyle(fontSize: 18.0, color: Colors.white))
            )
          ],
        ),
      ),
 
-
    );
   }
 
-  void startQuiz(){
+  void startQuiz1(){
    setState(() {
      Navigator.push(context, MaterialPageRoute(builder: (context)=> Quiz1()));
+   });
+  }
+   void startQuiz2(){
+   setState(() {
+     Navigator.push(context, MaterialPageRoute(builder: (context)=> Quiz2()));
    });
   }
 }
