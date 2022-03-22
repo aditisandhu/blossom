@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/loginservice.dart';
-import 'package:testapp/splash.dart';
+import 'package:testapp/helpers/loginservice.dart';
+import 'package:testapp/pages/navigation_bar.dart';
+import 'package:testapp/pages/onboarding_page.dart';
+import 'package:testapp/pages/splash.dart';
 import 'package:provider/provider.dart';
-
-import 'navigation_bar.dart';
-import 'start.dart';
+import './pages/start.dart';
 
 void main() {
   runApp(const App());
@@ -23,6 +23,8 @@ class App extends StatelessWidget {
         title: _title,
         debugShowCheckedModeBanner: false,
         home: SplashPage(duration: 2, goToPage: WelcomePage(),),
+        // home: OnboardingPage(),
+        // home: NavHome(),
         theme: ThemeData(
           fontFamily: 'OpenSans'
         ),

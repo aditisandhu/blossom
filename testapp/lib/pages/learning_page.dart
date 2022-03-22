@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'quiz1.dart';
+import '../helpers/quiz1.dart';
 
 class LearningPage extends StatefulWidget{
   @override

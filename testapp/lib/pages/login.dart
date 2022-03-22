@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:testapp/signup.dart';
-import 'package:testapp/themebutton.dart';
-import 'package:testapp/loginservice.dart';
+import 'package:testapp/pages/onboarding_page.dart';
+import 'package:testapp/pages/signup.dart';
+import 'package:testapp/views/themebutton.dart';
+import 'package:testapp/helpers/loginservice.dart';
 
-import 'navigation_bar.dart';
+import './navigation_bar.dart';
 
 class Login extends StatefulWidget {
   const Login({ Key? key }) : super(key: key);
@@ -223,10 +224,10 @@ class _LoginState extends State<Login> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-              loginService.emailSignIn(uid.user!.displayName ?? "Unknown Name", uid.user!.email ?? "Unkown Email"),
+              loginService.emailSignIn(uid.user!.uid, uid.user!.displayName ?? "Unknown Name", uid.user!.email ?? "Unkown Email"),
               Fluttertoast.showToast(msg: "Login Successful"),
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => NavHome())),
+                MaterialPageRoute(builder: (context) => OnboardingPage())),
           });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

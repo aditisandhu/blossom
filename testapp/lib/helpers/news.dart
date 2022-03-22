@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import './article.dart';
+import '../models/article.dart';
 import 'dart:convert';
-import './secret.dart';
+import '../secret.dart';
 
 class News {
 
@@ -33,8 +33,6 @@ class News {
 
       });
     }
-
-
   }
 
 

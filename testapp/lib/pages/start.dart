@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/login.dart';
-import 'package:testapp/loginservice.dart';
+import 'package:testapp/pages/login.dart';
+import 'package:testapp/helpers/loginservice.dart';
 import 'package:provider/provider.dart';
+import 'package:testapp/pages/onboarding_page.dart';
 import './navigation_bar.dart';
-import './themebutton.dart';
-import 'LoginUserModel.dart';
+import '../views/themebutton.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({ Key? key }) : super(key: key);
@@ -79,7 +79,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       if (success) {
                         Navigator.push(
                           context, 
-                          MaterialPageRoute(builder: (context) => NavHome())
+                          MaterialPageRoute(builder: (context) => OnboardingPage())
                         );
                       }
                     },

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:testapp/LoginUserModel.dart';
+import 'package:testapp/models/LoginUserModel.dart';
 
 class LoginService {
   LoginService() {
@@ -29,6 +29,7 @@ class LoginService {
     UserCredential userCreds = await FirebaseAuth.instance.signInWithCredential(credential);
     if (userCreds != null) {
       _userModel = LoginUserModel(
+        userId: userCreds.user!.uid, 
         displayName: userCreds.user!.displayName, 
         email: userCreds.user!.email
       );
@@ -41,8 +42,8 @@ class LoginService {
     _userModel = LoginUserModel();
   }
 
-  void emailSignIn(String name, String email) {
-    _userModel = LoginUserModel(displayName: name, email: email);
+  void emailSignIn(String userId, String name, String email) {
+    _userModel = LoginUserModel(userId: userId, displayName: name, email: email);
   }
 
   Future <void> signOut() async {

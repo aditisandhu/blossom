@@ -8,8 +8,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
-import './location_service.dart';
-import './new_menstrual_icons_icons.dart';
+import '../helpers/location_service.dart';
+import '../helpers/new_menstrual_icons_icons.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
