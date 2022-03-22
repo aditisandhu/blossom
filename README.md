@@ -1,7 +1,8 @@
 # Blossom
 An Andriod and iOS app created using Flutter, Firebase and Google Cloud Platform to [add summary from answered questions here].
+Add some screenshots or demo video
 
-# Usage
+## Usage
 1. Ensure you have Flutter and Andriod Studio downloaded on your machine and are able to run Flutter projects locally.
 2. Run the following command to ensure your system meets the requirements to run the app. All requirements must be met to run the app.
 ```
