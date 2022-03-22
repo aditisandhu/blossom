@@ -121,8 +121,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         activeColor: Color.fromARGB(255, 228, 118, 118),
                         inactiveColor: Color.fromARGB(255, 2, 42, 59),
                         min: 5,
-                        max: 100,
-                        divisions: 95,
+                        max: 20,
+                        divisions: 15,
                         label: _age.round().toString(),
                         onChanged: (double value) {
                           setState(() {
