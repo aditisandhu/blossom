@@ -29,13 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  table_calendar: ^2.3.3
-  provider: 
-  google_fonts:
-  shared_preferences:
-  font_awesome_flutter:
-  sqflite:
-  intl:
+  flutter_calendar_carousel: ^1.4.9
+  table_calendar: ^3.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

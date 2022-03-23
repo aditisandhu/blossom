@@ -89,22 +89,92 @@ class MyHomePageState extends State<MyHomePage> {
                   child: Center(child: Text('Add Question Here', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59)))),
 
                 ),
-        
+                
                 const SizedBox(height: 40,),
                 const Text("Reminders", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
                 
                 const SizedBox(height: 10,),
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
+                  margin: EdgeInsets.only(bottom: 15),
+                  padding: EdgeInsets.all(10),
+                  height: 100,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 237, 211, 210),
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 237, 211, 210),
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(20))
+                    color: Color.fromARGB(255, 237, 211, 210),
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Center(child: Text('Next Cycle In:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59)))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "31",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "MAR",
+                            style:
+                                TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 100,
+                        width: 1,
+                        color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.1),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width - 160,
+                            child: Text(
+                              "Upcoming cycle details",
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_outlined,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 160,
+                                child: Text(
+                                  "Start date: March 31",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.access_time_outlined,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Est. length: 3 days",
+                                style: TextStyle(color: Colors.grey, fontSize: 13),
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
         
                 const SizedBox(height: 40,),
