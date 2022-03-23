@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">29709108944-q2nqiejg1opr0ap3f14jhfmtc725t2b4.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">29709108944</string>
+    <string name="google_api_key" translatable="false">AIzaSyBMBWP9OvZJhug5TynJ04oYxafiWcSaJCA</string>
+    <string name="google_app_id" translatable="false">1:29709108944:android:744e77a5acee737df4c0d5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBMBWP9OvZJhug5TynJ04oYxafiWcSaJCA</string>
+    <string name="google_storage_bucket" translatable="false">blossom-342523.appspot.com</string>
+    <string name="project_id" translatable="false">blossom-342523</string>
+</resources>
