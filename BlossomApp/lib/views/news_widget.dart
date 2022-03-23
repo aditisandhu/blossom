@@ -25,8 +25,9 @@ class NewsTile extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20))
           ),
           padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(bottom: 18),
-          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.only(right: 10),
+          width: 275,
+          height: 330,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -42,7 +43,7 @@ class NewsTile extends StatelessWidget {
               const SizedBox(height: 12,),
               Text(
                 title,
-                maxLines: 2,
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: Colors.black87,
@@ -54,7 +55,7 @@ class NewsTile extends StatelessWidget {
               ),
               Text(
                 desc,
-                maxLines: 2,
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Colors.black54, fontSize: 14),
               )

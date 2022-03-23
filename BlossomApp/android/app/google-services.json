@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "29709108944",
+    "project_id": "blossom-342523",
+    "storage_bucket": "blossom-342523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29709108944:android:744e77a5acee737df4c0d5",
+        "android_client_info": {
+          "package_name": "com.example.testapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29709108944-9254f4gatbline6vhs3un2moll465fv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.testapp",
+            "certificate_hash": "fa5ccf2bb253848455f119339856d9b36ab11427"
+          }
+        },
+        {
+          "client_id": "29709108944-q2nqiejg1opr0ap3f14jhfmtc725t2b4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMBWP9OvZJhug5TynJ04oYxafiWcSaJCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29709108944-q2nqiejg1opr0ap3f14jhfmtc725t2b4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29709108944-3mkfl75el5o9irs50jt5dh2oqtg8li2i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
