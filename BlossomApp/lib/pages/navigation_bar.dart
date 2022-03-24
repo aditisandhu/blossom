@@ -23,7 +23,7 @@ class NavHomeState extends State<NavHome> {
   // ignore: prefer_final_fields
   static List<Widget> _pages = <Widget>[
     const MyHomePage(title: 'Home Page'),
-    HomePage(),
+    Tracker(),
     LearningPage(),
     const MapSample(),
   ];

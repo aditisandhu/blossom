@@ -1,15 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/pages/calendar.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:testapp/pages/event.dart';
+//import 'package:testapp/models/LoginUserModel.dart';
+//import 'package:testapp/helpers/loginservice.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+//LoginService loginService = Provider.of<LoginService>(context, listen:false);
+//LoginUserModel userModel = loginService.loggedInUserModel;
+
+//CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+class Tracker extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _TrackerState createState() => _TrackerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TrackerState extends State<Tracker> {
+  late Map<DateTime, List<Event>> selectedEvents;
+  CalendarFormat format = CalendarFormat.month;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+
+  TextEditingController _eventController = TextEditingController();
+
+  get floatingActionButton => null;
+
+  @override
+  void initState() {
+    selectedEvents = {};
+    super.initState();
+  }
+  
+  List<Event> _getEventsfromDay(DateTime date) {
+    return selectedEvents[date] ?? [];
+  }
+
+  @override
+  void dispose() {
+    _eventController.dispose();
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
+    
     return Stack(
       children: [
         Container(
@@ -19,28 +55,8 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.centerRight,
-                child: RichText(
-                  text: TextSpan(
-                      text: "Tuesday",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900),
-                      children: [
-                        TextSpan(
-                          text: " March 22",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal),
-                        )
-                      ]),
-                ),
-              ),
               SizedBox(
-                height: 15,
+                height: 10,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,16 +80,26 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         "My Cycle",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 27,
                           fontWeight: FontWeight.w900,
                           color: Color.fromARGB(255, 222, 116, 116),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Text(
-                        "Learn more about your cycle",
+                        "Keep track of your period and how you feel.",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "You'll begin to notice your personal trends!",
                         style: TextStyle(
                           fontSize: 13,
                           color: Color.fromARGB(255, 255, 255, 255),
@@ -100,14 +126,6 @@ class _HomePageState extends State<HomePage> {
               children: [
                 buildClassItem1(),
                 buildClassItem2(),
-                SizedBox(
-                  height: 25,
-                ),
-                buildTitleRow("REMINDERS"),
-                SizedBox(
-                  height: 20,
-                ),
-                buildTaskItem3()
               ],
             ),
           ),
@@ -116,199 +134,100 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container buildTaskItem3() {
-    return Container(
-     margin: EdgeInsets.only(bottom: 15),
-      padding: EdgeInsets.all(10),
-      height: 100,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "31",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "MAR",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-              ),
-            ],
-          ),
-          Container(
-            height: 100,
-            width: 1,
-            color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width - 160,
-                child: Text(
-                  "Upcoming cycle details",
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today_outlined,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 160,
-                    child: Text(
-                      "Start date: March 31",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.grey, fontSize: 13),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.access_time_outlined,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "Est. length: 3 days",
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
-                  )
-                ],
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Row buildTitleRow(String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        RichText(
-          text: TextSpan(
-              text: title,
-              style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-              children: [
-                TextSpan(
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.normal),
-                ),
-              ]),
-        ),
-      ],
-    );
-  }
-
+  
   Container buildClassItem1() {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
       padding: EdgeInsets.all(10),
-      height: 250,
+      height: 425,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "31",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "MAR",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-              ),
-            ],
-          ),
-          Container(
-            height: 100,
-            width: 1,
-            color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width - 160,
-                child: Text(
-                  "Upcoming cycle details",
-                  overflow: TextOverflow.ellipsis,
+          Expanded(
+            child: SizedBox(
+              height: 425,
+              width: 300,
+              child: TableCalendar(
+                shouldFillViewport: true,
+                focusedDay: selectedDay,
+                firstDay: DateTime(2000),
+                lastDay: DateTime(2050),
+                calendarFormat: format,
+                onFormatChanged: (CalendarFormat _format) {
+                  setState(() {
+                    format = _format;
+                  });
+                },
+                startingDayOfWeek: StartingDayOfWeek.sunday,
+                daysOfWeekVisible: true,
+
+                //Day Changed
+                onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                  setState(() {
+                    selectedDay = selectDay;
+                    focusedDay = focusDay;
+                  });
+                  print(focusedDay);
+                },
+                selectedDayPredicate: (DateTime date) {
+                  return isSameDay(selectedDay, date);
+                },
+
+                eventLoader: _getEventsfromDay,
+
+                //To style the Calendar
+                calendarStyle: CalendarStyle(
+                  isTodayHighlighted: true,
+                  selectedDecoration: BoxDecoration(
+                    color: Color.fromARGB(255, 222, 116, 116),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  selectedTextStyle: TextStyle(color: Colors.white),
+                  todayDecoration: BoxDecoration(
+                    color: Color.fromARGB(253, 238, 170, 98),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  defaultDecoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  weekendDecoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: true,
+                  titleCentered: true,
+                  formatButtonShowsNext: false,
+                  formatButtonDecoration: BoxDecoration(
+                    color: Color.fromARGB(255, 222, 116, 116),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  formatButtonTextStyle: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today_outlined,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 160,
-                    child: Text(
-                      "Start date: March 31",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.grey, fontSize: 13),
-                    ),
-                  )
-                ],
+            ),
+          ),
+          ..._getEventsfromDay(selectedDay).map(
+            (Event event) => ListTile(
+              title: Text(
+                event.title,
               ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.access_time_outlined,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "Est. length: 3 days",
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
-                  )
-                ],
-              ),
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );
   }
+
 Container buildClassItem2() {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
@@ -318,7 +237,50 @@ Container buildClassItem2() {
         color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Center(child: Text('Add Period Details', style: TextStyle(fontSize: 13, color: Color.fromARGB(255, 2, 42, 59)))),
+      child: new RawMaterialButton( //Center(child: Text('Add Period Details', style: TextStyle(fontSize: 13, color: Color.fromARGB(255, 2, 42, 59)))),
+        //floatingActionButton: FloatingActionButton.extended(
+          child:Text("Add Period Details"),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Details"),
+              backgroundColor: Color.fromARGB(255, 237, 211, 210), 
+              content: TextFormField(
+                controller: _eventController,
+              ),
+              actions: [
+                TextButton(
+                  child: Text("Cancel"),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                TextButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    if (_eventController.text.isEmpty) {
+
+                    } else {
+                      if (selectedEvents[selectedDay] != null) {
+                        selectedEvents[selectedDay]!.add(
+                          Event(title: _eventController.text),
+                        );
+                      } else {
+                        selectedEvents[selectedDay] = [
+                          Event(title: _eventController.text)
+                        ];
+                      }
+
+                    }
+                    Navigator.pop(context);
+                    _eventController.clear();
+                    setState((){});
+                    return;
+                  },
+                ),
+              ],
+            ),
+          ),
+        //),
+      ),
     );
   }
 }
