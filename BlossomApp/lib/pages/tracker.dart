@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/pages/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:testapp/pages/event.dart';
+import 'package:testapp/helpers/event.dart';
 //import 'package:testapp/models/LoginUserModel.dart';
 //import 'package:testapp/helpers/loginservice.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +18,10 @@ class Tracker extends StatefulWidget {
 }
 
 class _TrackerState extends State<Tracker> {
+  
+
+  //save selected events
+
   late Map<DateTime, List<Event>> selectedEvents;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
@@ -45,7 +49,7 @@ class _TrackerState extends State<Tracker> {
   
   @override
   Widget build(BuildContext context) {
-    
+    //display
     return Stack(
       children: [
         Container(
@@ -124,8 +128,8 @@ class _TrackerState extends State<Tracker> {
             ),
             child: ListView(
               children: [
-                buildClassItem1(),
-                buildClassItem2(),
+                buildClassItem1(), //calendar
+                buildClassItem2(), //add period details button
               ],
             ),
           ),
@@ -164,7 +168,7 @@ class _TrackerState extends State<Tracker> {
                 startingDayOfWeek: StartingDayOfWeek.sunday,
                 daysOfWeekVisible: true,
 
-                //Day Changed
+                //selected day 
                 onDaySelected: (DateTime selectDay, DateTime focusDay) {
                   setState(() {
                     selectedDay = selectDay;
@@ -178,7 +182,7 @@ class _TrackerState extends State<Tracker> {
 
                 eventLoader: _getEventsfromDay,
 
-                //To style the Calendar
+                //calendar styling
                 calendarStyle: CalendarStyle(
                   isTodayHighlighted: true,
                   selectedDecoration: BoxDecoration(
@@ -216,6 +220,7 @@ class _TrackerState extends State<Tracker> {
               ),
             ),
           ),
+          //display event details when a specific day is clicked
           ..._getEventsfromDay(selectedDay).map(
             (Event event) => ListTile(
               title: Text(
@@ -237,8 +242,7 @@ Container buildClassItem2() {
         color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.5),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: new RawMaterialButton( //Center(child: Text('Add Period Details', style: TextStyle(fontSize: 13, color: Color.fromARGB(255, 2, 42, 59)))),
-        //floatingActionButton: FloatingActionButton.extended(
+      child: new RawMaterialButton( 
           child:Text("Add Period Details"),
           onPressed: () => showDialog(
             context: context,
@@ -255,6 +259,7 @@ Container buildClassItem2() {
                 ),
                 TextButton(
                   child: Text("Ok"),
+                  //add event details for an empty day
                   onPressed: () {
                     if (_eventController.text.isEmpty) {
 
@@ -270,6 +275,7 @@ Container buildClassItem2() {
                       }
 
                     }
+                    //clear when done
                     Navigator.pop(context);
                     _eventController.clear();
                     setState((){});
@@ -279,7 +285,6 @@ Container buildClassItem2() {
               ],
             ),
           ),
-        //),
       ),
     );
   }
