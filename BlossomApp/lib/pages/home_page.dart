@@ -101,23 +101,6 @@ class MyHomePageState extends State<MyHomePage> {
                 ),
         
                 const SizedBox(height: 40,),
-                const Text("Reminders", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
-                
-                const SizedBox(height: 10,),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 237, 211, 210),
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 237, 211, 210),
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(20))
-                  ),
-                  child: Center(child: Text('Next Cycle In:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59)))),
-                ),
-        
-                const SizedBox(height: 40,),
                 const Text("Latest Stories", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
                 
                 SafeArea(
