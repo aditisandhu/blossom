@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:testapp/pages/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:testapp/helpers/event.dart';
-//import 'package:testapp/models/LoginUserModel.dart';
-//import 'package:testapp/helpers/loginservice.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:provider/provider.dart';
+import 'package:testapp/models/LoginUserModel.dart';
+import 'package:testapp/helpers/loginservice.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 //LoginService loginService = Provider.of<LoginService>(context, listen:false);
 //LoginUserModel userModel = loginService.loggedInUserModel;
@@ -17,8 +17,7 @@ class Tracker extends StatefulWidget {
   _TrackerState createState() => _TrackerState();
 }
 
-class _TrackerState extends State<Tracker> {
-  
+class _TrackerState extends State<Tracker> { 
 
   //save selected events
 
@@ -49,6 +48,20 @@ class _TrackerState extends State<Tracker> {
   
   @override
   Widget build(BuildContext context) {
+    LoginService loginService = Provider.of<LoginService>(context, listen:false);
+    LoginUserModel userModel = loginService.loggedInUserModel;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    Future<void> updateCalender() { // CALL THIS FUNCTION WHEN USER SAVES SOMETHING TO CALENDER
+      // Call the user's CollectionReference to add a new user
+      return users
+        .doc(userModel.userId).set({
+          'tracker': {"add something" : "here"}, 
+        })
+        .then((value) => print("Calender updated"))
+        .catchError((error) => print("Failed to update calender: $error"));
+    }
+
     //display
     return Stack(
       children: [
