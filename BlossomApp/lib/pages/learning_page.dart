@@ -31,7 +31,6 @@ class LearningPageState extends State<LearningPage> {
           child: Container(
             padding: EdgeInsets.all(16),
             alignment: Alignment.centerLeft,
-            child: buildWelcome(),
           ),
         ),
       ),
@@ -196,21 +195,5 @@ class LearningPageState extends State<LearningPage> {
     });
   }
 
-  Widget buildWelcome() => Column(
-        children: [
-          Text(
-            'Hello',
-            style:
-                TextStyle(fontSize: 16, color: Color.fromARGB(255, 2, 42, 59)),
-          textAlign: TextAlign.left),
-          Text(
-            'Anonymous User!',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 2, 42, 59),
-            ),
-          )
-        ],
-      );
+ 
 }

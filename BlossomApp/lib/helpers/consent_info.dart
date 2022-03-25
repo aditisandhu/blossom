@@ -52,6 +52,7 @@ class ConsentState extends State<Consent> {
                   style: const TextStyle(
                       fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)),
                   overflow: TextOverflow.clip),
+                  const Padding(padding: const EdgeInsets.all(10.0)),
                   TextButton(
                 
                 onPressed: null,
