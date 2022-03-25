@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\jinal\\OneDrive\\Documents\\GitHub\\shark-week\\testapp\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_tint.xml",
+        "source": "C:\\Users\\jinal\\.gradle\\caches\\transforms-2\\files-2.1\\1c0769389455a4c14b7a50bc2530cb4a\\jetified-play-services-base-18.0.1\\res\\color\\common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "C:\\Users\\jinal\\OneDrive\\Documents\\GitHub\\shark-week\\testapp\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_dark.xml",
+        "source": "C:\\Users\\jinal\\.gradle\\caches\\transforms-2\\files-2.1\\1c0769389455a4c14b7a50bc2530cb4a\\jetified-play-services-base-18.0.1\\res\\color\\common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\jinal\\OneDrive\\Documents\\GitHub\\shark-week\\testapp\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_light.xml",
+        "source": "C:\\Users\\jinal\\.gradle\\caches\\transforms-2\\files-2.1\\1c0769389455a4c14b7a50bc2530cb4a\\jetified-play-services-base-18.0.1\\res\\color\\common_google_signin_btn_text_light.xml"
+    }
+]
