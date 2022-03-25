@@ -62,6 +62,27 @@ class _TrackerState extends State<Tracker> {
         .catchError((error) => print("Failed to update calender: $error"));
     }
 
+    // USE THE FOLLOWING WHEN U WANT TO READ DATA
+    // FutureBuilder<DocumentSnapshot>(
+    //   future: users.doc(userModel.userId).get(),
+    //   builder: (BuildContext context,
+    //       AsyncSnapshot<DocumentSnapshot> snapshot) {
+    //     if (snapshot.hasError) {
+    //       return Text("Something went wrong");
+    //     }
+
+    //     if (snapshot.hasData && !snapshot.data!.exists) {
+    //       return Text("Document does not exist");
+    //     }
+
+    //     if (snapshot.connectionState == ConnectionState.done) {
+    //       Map<String, dynamic> data =
+    //           snapshot.data!.data() as Map<String, dynamic>;
+    //       return Text(data['add something']);
+    //     }
+    //    });
+            
+
     //display
     return Stack(
       children: [
