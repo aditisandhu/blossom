@@ -105,6 +105,7 @@ class MyHomePageState extends State<MyHomePage> {
                 
                   decoration: BoxDecoration(
                     image: DecorationImage(
+                      scale: 2,
                       alignment: Alignment.centerLeft,
                         image: NetworkImage(
                             "https://i.postimg.cc/FspsBNWv/Untitled-drawing-2.png"),
@@ -117,20 +118,16 @@ class MyHomePageState extends State<MyHomePage> {
                           const BorderRadius.all(Radius.circular(20))
                           ),
                   child: Center(
+                    
                     child: TextButton(
                       child: Text('Question \nNumber 31',
                       overflow: TextOverflow.clip,
+                    
                           style: const TextStyle(
                               fontSize: 30.0,
                               color: Color.fromARGB(255, 2, 42, 59)
                           ),
                           textAlign: TextAlign.right),
-                        style: ButtonStyle(
-                            
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ))),
                         onPressed: (dailyQuestion), 
                         ),
                   ),
