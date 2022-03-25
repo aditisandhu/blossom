@@ -1,13 +1,19 @@
 # Blossom
-An Andriod and iOS app created using Flutter, Firebase and Google Cloud Platform to [goal].
 
-## Features [summarize]
+Blossom is a one-stop app for young girls to gain access to accurate and reliable menstrual education and resources, available on Android and iOS. 
 
-- Period Logger, include ss
-- Maps, include ss
-- Learning page, include ss
+## Features
+
+- User can either sign-in through google, create an account, or continue as an anonymous user
+- Onboarding questions to personalize user experience
+- Home page with daily quiz question, upcoming cycle details, and news stories related to reproductive cycle relief and recent findings 
+- A period tracker, with a calendar to log period information
+- A learning hub, with quizzes and resources
+- A map page that allows users to find the nearest period product and health services, as well as alternatives
 
 ## Demo
+
+Coming soon!
 
 ## Usage
 1. Ensure you have Flutter and Andriod Studio downloaded on your machine and are able to run Flutter projects locally.
