@@ -95,6 +95,47 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 });
               },
               children: [
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
+                  margin: EdgeInsets.fromLTRB(40, 30, 40, 30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 237, 211, 210),
+                        blurRadius: 20,
+                        offset: Offset.zero
+                      )
+                    ]
+                  ),
+                  child: Column(
+                    children: [
+                      Text("Answer a few questions to start personalizing your Blossom experience!", textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 2, 42, 59)),),
+                      SizedBox(height: 100,),
+                      Center(
+                        child: ClipOval(
+                          child: Container(
+                            width: 150,
+                            height: 150,
+                            // color: Color.fromARGB(255, 237, 211, 210),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              // color: Color.fromARGB(255, 255, 255, 255),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/Logo.png'),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
@@ -190,7 +231,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 ),
 
-
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
                   margin: EdgeInsets.fromLTRB(40, 30, 40, 30),
@@ -223,7 +263,31 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 40,),
+                    ]
+                  )
+                ),
+
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
+                  margin: EdgeInsets.fromLTRB(40, 30, 40, 30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 237, 211, 210),
+                        blurRadius: 20,
+                        offset: Offset.zero
+                      )
+                    ]
+                  ),
+                  child: Column(
+                    children: [
+                      Text("By continuing, you agree to share your location.", textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 2, 42, 59)),),
+                      SizedBox(height: 25,),
+                      Text("Your location will not be stored or shared outside the app.", textAlign: TextAlign.center, style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 130, 130, 130)),),
+                      SizedBox(height: 220,),
                       ThemeButton(
                         label: 'Save & Proceed',
                         highlight: Color.fromARGB(255, 237, 211, 210),
@@ -244,7 +308,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(3, (index) => 
+              children: List.generate(5, (index) => 
                 GestureDetector(
                   onTap: () {
                     _controller.animateTo(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../helpers/question1.dart';
+import '../views/themebutton.dart';
 
 class Consent extends StatefulWidget {
   @override
@@ -13,6 +14,9 @@ class ConsentState extends State<Consent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color.fromARGB(255, 2, 42, 59)
+        ),
         backgroundColor: Color.fromARGB(255, 237, 211, 210),
         elevation: 0,
         title: Text('Consent',
@@ -30,21 +34,14 @@ class ConsentState extends State<Consent> {
                       fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)),
                   overflow: TextOverflow.clip),
                   const Padding(padding: const EdgeInsets.all(10.0)),
-              TextButton(
-                
-                onPressed: Question1,
-                child: const Text("Check Your Understanding",
-                    style: TextStyle(
-                        fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)), textAlign: TextAlign.center,),
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 10)),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 237, 211, 210)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ))),
+              
+              Center(
+                child: ThemeButton(
+                    label: 'Check Your Understanding',
+                    highlight: Color.fromARGB(255, 237, 211, 210),
+                    color: Color.fromARGB(255, 2, 42, 59),
+                    onClick: Question1,
+                  ),
               ),
               const Padding(padding: const EdgeInsets.all(10.0)),
               Text(
@@ -52,22 +49,16 @@ class ConsentState extends State<Consent> {
                   style: const TextStyle(
                       fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)),
                   overflow: TextOverflow.clip),
-                  const Padding(padding: const EdgeInsets.all(10.0)),
-                  TextButton(
-                
-                onPressed: null,
-                child: const Text("Check Your Understanding",
-                    style: TextStyle(
-                        fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)), textAlign: TextAlign.center,),
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 10)),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 237, 211, 210)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ))),
+
+              SizedBox(height: 20,),  
+              
+              Center(
+                child: ThemeButton(
+                    label: 'Check Your Understanding',
+                    highlight: Color.fromARGB(255, 237, 211, 210),
+                    color: Color.fromARGB(255, 2, 42, 59),
+                    onClick: () {},
+                  ),
               ),
             ],
           ),

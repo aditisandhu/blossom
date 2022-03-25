@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/helpers/final_page.dart';
+import 'package:testapp/pages/learning_page.dart';
+import 'package:testapp/pages/navigation_bar.dart';
 
 import 'consent_info.dart';
 
@@ -64,8 +66,8 @@ class Quiz1State extends State<Quiz1> {
                   children: <Widget>[
                     //button 1
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -97,8 +99,8 @@ class Quiz1State extends State<Quiz1> {
 
                     //button 2
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -139,8 +141,8 @@ class Quiz1State extends State<Quiz1> {
 
                     //button 3
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -172,8 +174,8 @@ class Quiz1State extends State<Quiz1> {
 
                     //button 4
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -262,7 +264,7 @@ class Quiz1State extends State<Quiz1> {
   }
    void consentInfo() {
     setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Consent()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => NavHome(passedIndex: 2,)));
     });
   }
 }

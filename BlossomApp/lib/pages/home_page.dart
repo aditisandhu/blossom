@@ -101,15 +101,9 @@ class MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 200,
+                  height: 150,
                 
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      scale: 2,
-                      alignment: Alignment.centerLeft,
-                        image: NetworkImage(
-                            "https://i.postimg.cc/FspsBNWv/Untitled-drawing-2.png"),
-                      ),
                       color: const Color.fromARGB(255, 237, 211, 210),
                       border: Border.all(
                         color: const Color.fromARGB(255, 237, 211, 210),
@@ -117,21 +111,136 @@ class MyHomePageState extends State<MyHomePage> {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))
                           ),
-                  child: Center(
-                    
-                    child: TextButton(
-                      child: Text('Question \nNumber 31',
-                      overflow: TextOverflow.clip,
-                    
-                          style: const TextStyle(
-                              fontSize: 30.0,
-                              color: Color.fromARGB(255, 2, 42, 59)
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        // color: Color.fromARGB(255, 237, 211, 210),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          // color: Color.fromARGB(255, 255, 255, 255),
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'assets/Logo.png'),
+                            fit: BoxFit.fill,
                           ),
-                          textAlign: TextAlign.right),
-                        onPressed: (dailyQuestion), 
+                          shape: BoxShape.circle,
                         ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Center(
+                        child: TextButton(
+                          child: Text('Question \nNumber 31',
+                          overflow: TextOverflow.clip,
+                              style: const TextStyle(
+                                  fontSize: 30.0,
+                                  color: Color.fromARGB(255, 2, 42, 59)
+                              ),
+                              textAlign: TextAlign. center),
+                            style: ButtonStyle(
+                                
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ))),
+                            onPressed: (dailyQuestion), 
+                            ),
+                      ),
+                    ],
                   ),
                 ),
+
+                const SizedBox(height: 40,),
+
+                const Text("Reminders", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 2, 42, 59))),
+
+                const SizedBox(height: 10,),
+                Container(
+                  margin: EdgeInsets.only(bottom: 15),
+                  padding: EdgeInsets.all(10),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 237, 211, 210),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "31",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "MAR",
+                            style:
+                                TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 100,
+                        width: 1,
+                        color: Color.fromARGB(255, 237, 211, 210).withOpacity(0.1),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width - 160,
+                            child: Text(
+                              "Upcoming cycle details",
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_outlined,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 160,
+                                child: Text(
+                                  "Start date: March 31",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.access_time_outlined,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Est. length: 3 days",
+                                style: TextStyle(color: Colors.grey, fontSize: 13),
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+
                 const SizedBox(
                   height: 40,
                 ),

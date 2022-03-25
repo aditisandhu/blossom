@@ -78,40 +78,46 @@ class _TrackerState extends State<Tracker> {
                   SizedBox(
                     width: 20,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "My Cycle",
-                        style: TextStyle(
-                          fontSize: 27,
-                          fontWeight: FontWeight.w900,
-                          color: Color.fromARGB(255, 222, 116, 116),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Keep track of your period and how you feel.",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "You'll begin to notice your personal trends!",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                    ],
-                  )
+                  Text(
+                    "My Cycle",
+                    style: TextStyle(
+                      fontSize: 27,
+                      fontWeight: FontWeight.w900,
+                      color: Color.fromARGB(255, 222, 116, 116),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                 ],
+              ),
+              SizedBox(
+                    height: 15,
+                  ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    
+                    Text(
+                      "Keep track of your period and how you feel.",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color.fromARGB(255, 2, 42, 59),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "You'll begin to notice your personal trends!",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color.fromARGB(255, 2, 42, 59),
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

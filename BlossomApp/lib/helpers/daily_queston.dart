@@ -64,8 +64,8 @@ class Quiz5State extends State<Quiz5> {
                   children: <Widget>[
                     //button 1
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -97,8 +97,8 @@ class Quiz5State extends State<Quiz5> {
 
                     //button 2
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -139,8 +139,8 @@ class Quiz5State extends State<Quiz5> {
 
                     //button 3
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:
@@ -172,8 +172,8 @@ class Quiz5State extends State<Quiz5> {
 
                     //button 4
                     Container(
-                      width: 180.0,
-                      height: 220.0,
+                      width: 150.0,
+                      height: 250.0,
                       child: TextButton(
                         style: ButtonStyle(
                   padding:

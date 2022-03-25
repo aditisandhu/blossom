@@ -5,7 +5,8 @@ import 'home_page.dart';
 import 'maps_page.dart';
 
 class NavHome extends StatefulWidget {
-  const NavHome({Key? key}) : super(key: key);
+  int passedIndex;
+  NavHome({Key? key, this.passedIndex = 0}) : super(key: key);
 
   @override
   State createState() {
@@ -16,6 +17,11 @@ class NavHome extends StatefulWidget {
 class NavHomeState extends State<NavHome> {
 
   int selectedIndex = 0;
+  
+  @override
+  void initState() {
+    int selectedIndex = widget.passedIndex;
+  }
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);

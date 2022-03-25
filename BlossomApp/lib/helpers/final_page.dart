@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/pages/learning_page.dart';
+import 'package:testapp/pages/navigation_bar.dart';
 
 import 'consent_info.dart';
 class FinalPage extends StatefulWidget {
@@ -16,7 +18,7 @@ class FinalPageState extends State<FinalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold
-    (body: Container(
+    (body: Container(margin: EdgeInsets.all(20),
     
           child: Column(
             
@@ -51,7 +53,7 @@ const Padding(padding: EdgeInsets.all(100.0)),
 }
   void consentInfo() {
     setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Consent()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => NavHome(passedIndex: 2,)));
     });
   }
 }

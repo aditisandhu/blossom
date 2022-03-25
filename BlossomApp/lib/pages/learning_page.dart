@@ -15,27 +15,64 @@ class LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 237, 211, 210),
-        elevation: 0,
-        title: Text(
-                        "My Learning",
-                        style: TextStyle(
-                          fontSize: 27,
-                          fontWeight: FontWeight.w900,
-                          color: Color.fromARGB(255, 222, 116, 116),
+      backgroundColor: Color.fromARGB(255, 237, 211, 210),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90), 
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 237, 211, 210),
+            border: Border.all(
+              color: const Color.fromARGB(255, 237, 211, 210),
+            ),
+            borderRadius:
+                const BorderRadius.all(Radius.circular(20))
+                ),
+          child: Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 35,),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              "https://www.pngall.com/wp-content/uploads/5/Learning-PNG-Free-Image.png"),
                         ),
                       ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80),
-          child: Container(
-            padding: EdgeInsets.all(16),
-            alignment: Alignment.centerLeft,
-          ),
-        ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                          "My Learning",
+                          style: TextStyle(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w900,
+                            color: Color.fromARGB(255, 222, 116, 116),
+                          ),
+                        ),
+            ],
+          )]),
+        )
       ),
+
       body: Container(
-        margin: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15),
+        margin: EdgeInsets.only(top: 15),
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+          border: Border.all(
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(20))
+              ),
         child: GridView(
           primary: false,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -90,11 +127,13 @@ class LearningPageState extends State<LearningPage> {
                     borderRadius: BorderRadius.circular(18.0),
                   ))),
             ),
+
+            
             TextButton(
               onPressed: startQuiz4,
               child: const Text("Contraceptives",
                   style: TextStyle(
-                      fontSize: 18.0, color: Colors.white)),
+                      fontSize: 17.0, color: Colors.white)),
               style: ButtonStyle(
                   padding:
                       MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
@@ -137,7 +176,7 @@ class LearningPageState extends State<LearningPage> {
             ),
             TextButton(
               onPressed: startQuiz2,
-              child: const Text("Period Products",
+              child: const Text("Period Products", textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18.0, color: Colors.white)),
               style: ButtonStyle(
