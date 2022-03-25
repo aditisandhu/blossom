@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/models/LoginUserModel.dart';
-import '../helpers/quiz1.dart';
 import '../helpers/quiz2.dart';
 import '../helpers/quiz3.dart';
 import '../helpers/quiz4.dart';
-import '../pages/home_page.dart';
+import '../helpers/consent_info.dart';
 
 class LearningPage extends StatefulWidget {
   @override
@@ -18,9 +16,16 @@ class LearningPageState extends State<LearningPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 237, 211, 210),
         elevation: 0,
-        title: Text('My Learning'),
+        title: Text(
+                        "My Learning",
+                        style: TextStyle(
+                          fontSize: 27,
+                          fontWeight: FontWeight.w900,
+                          color: Color.fromARGB(255, 222, 116, 116),
+                        ),
+                      ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(80),
           child: Container(
@@ -32,43 +37,144 @@ class LearningPageState extends State<LearningPage> {
       ),
       body: Container(
         margin: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: GridView(
+          primary: false,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 4 / 3,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 30,
+          ),
           children: <Widget>[
-            MaterialButton(
-                height: 50.0,
-                color: Colors.pink,
-                onPressed: startQuiz1,
-                child: const Text("Consent",
-                    style: TextStyle(fontSize: 18.0, color: Colors.white))),
-            MaterialButton(
-                height: 50.0,
-                color: Colors.pink,
-                onPressed: startQuiz2,
-                child: const Text("Periods",
-                    style: TextStyle(fontSize: 18.0, color: Colors.white))),
-            MaterialButton(
-                height: 50.0,
-                color: Colors.pink,
-                onPressed: startQuiz3,
-                child: const Text("Self Care",
-                    style: TextStyle(fontSize: 18.0, color: Colors.white))),
-            MaterialButton(
-                height: 50.0,
-                color: Colors.pink,
-                onPressed: startQuiz4,
-                child: const Text("Contraceptives",
-                    style: TextStyle(fontSize: 18.0, color: Colors.white)))
+            TextButton(
+              onPressed: consentInfo,
+              child: const Text("Consent",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: startQuiz2,
+              child: const Text("Periods",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                     Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: startQuiz3,
+              child: const Text("Self Care",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: startQuiz4,
+              child: const Text("Contraceptives",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: consentInfo,
+              child: const Text("Ovulation",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: consentInfo,
+              child: const Text("Safety",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: startQuiz2,
+              child: const Text("Period Products",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                     Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
+            TextButton(
+              onPressed: startQuiz3,
+              child: const Text("Pregnancy",
+                  style: TextStyle(
+                      fontSize: 18.0, color: Colors.white)),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 222, 116, 116)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ))),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void startQuiz1() {
+  void consentInfo() {
     setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Quiz1()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Consent()));
     });
   }
 
@@ -94,14 +200,15 @@ class LearningPageState extends State<LearningPage> {
         children: [
           Text(
             'Hello',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
+            style:
+                TextStyle(fontSize: 16, color: Color.fromARGB(255, 2, 42, 59)),
+          textAlign: TextAlign.left),
           Text(
             'Anonymous User!',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Color.fromARGB(255, 2, 42, 59),
             ),
           )
         ],
