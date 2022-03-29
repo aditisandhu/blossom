@@ -25,7 +25,7 @@ class ConsentState extends State<Consent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                  " Consent is a concept not many individuals talk about, but is one everyone needs to understand. Consent does not only have to pertain to sexual activity, but can pertain to anything in which individuals agree to participate in some activity. Consent should be communicated by both parties in order to understand and respect one another's boundaries.",
+                  "Consent is a concept not many individuals talk about, but is one everyone needs to understand. Consent does not only have to pertain to sexual activity, but can pertain to anything in which individuals agree to participate in some activity. Consent should be communicated by both parties in order to understand and respect one another's boundaries.",
                   style: const TextStyle(
                       fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)),
                   overflow: TextOverflow.clip),
@@ -48,7 +48,7 @@ class ConsentState extends State<Consent> {
               ),
               const Padding(padding: const EdgeInsets.all(10.0)),
               Text(
-                  " Consent cannot be given when an individual is impaired or unaware of their surroundings. If someone consents as a result of pressure from the other party, then that cannot be considered as true consent. Consent also cannot be freely given when there are differences in power between each party. These unequal power dynamics can occur at school or work.",
+                  "Consent cannot be given when an individual is impaired or unaware of their surroundings. If someone consents as a result of pressure from the other party, then that cannot be considered as true consent. Consent also cannot be freely given when there are differences in power between each party. These unequal power dynamics can occur at school or work.",
                   style: const TextStyle(
                       fontSize: 20, color: Color.fromARGB(255, 2, 42, 59)),
                   overflow: TextOverflow.clip),
