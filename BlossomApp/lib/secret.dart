@@ -1,1 +1,2 @@
-String apiKey = "b690869b860748958a63473764f743a6";
+String NewsAPIKey = "NEWS API Key Here";
+String GoogleAPIKey = "Google API Key Here";

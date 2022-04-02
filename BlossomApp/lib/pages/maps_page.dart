@@ -10,6 +10,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import '../helpers/location_service.dart';
 import '../helpers/new_menstrual_icons_icons.dart';
+import '../secret.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class MapSampleState extends State<MapSample> {
   Set<Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints = PolylinePoints();
-  String googleAPIKey = 'AIzaSyAi9LUQc127AeXYJGrV7Ib24FFw64o-C2w';
+  String googleAPIKey = GoogleAPIKey;
 
     // ignore: prefer_const_declarations
   static final CameraPosition _kGooglePlex = const CameraPosition(
