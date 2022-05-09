@@ -13,7 +13,7 @@ Blossom is a one-stop app for young girls to gain access to accurate and reliabl
 
 ## Demo
 
-Coming soon!
+Click [HERE](https://youtu.be/wKz6-HVQbGM) to check it out! 
 
 ## Usage
 1. Ensure you have Flutter and Andriod Studio downloaded on your machine and are able to run Flutter projects locally.
